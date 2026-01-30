@@ -66,35 +66,21 @@ def get_margin_balance(ticker):
         return {"buy": "-", "sell": "-", "ratio": "-", "date": ""}
 
 def get_current_price(ticker):
-    """Yahoo!ファイナンスから正確な終値を取得"""
-    url = f"https://finance.yahoo.co.jp/quote/{ticker}"
+    """yfinanceから最新の日足終値を取得"""
     try:
-        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
-        soup = BeautifulSoup(r.content, "html.parser")
+        # 直近2日間の日足データを取得（確実に終値を取るため）
+        df = yf.download(ticker, period="2d", interval="1d", progress=False, threads=False)
+        if df.empty:
+            return None
         
-        # 終値を探す（複数の方法を試す）
-        # 方法1: data-test属性で探す
-        price_elem = soup.find("span", {"data-test": "quote-price"})
-        if price_elem:
-            price_text = price_elem.get_text(strip=True).replace(",", "")
-            return float(price_text)
+        # マルチインデックスの場合、1階層目を取得
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
         
-        # 方法2: クラス名で探す
-        price_elem = soup.find("span", class_=lambda c: c and "StockPrice" in c)
-        if price_elem:
-            price_text = price_elem.get_text(strip=True).replace(",", "")
-            return float(price_text)
-            
-        # 方法3: テキスト検索
-        price_section = soup.find(string=re.compile("現在値"))
-        if price_section:
-            parent = price_section.parent.parent
-            price_span = parent.find("span", class_=lambda c: c and "value" in c.lower() if c else False)
-            if price_span:
-                price_text = price_span.get_text(strip=True).replace(",", "")
-                return float(price_text)
+        # 最新の終値を返す
+        close_price = df["Close"].iloc[-1]
+        return float(close_price)
         
-        return None
     except Exception as e:
         print(f"Price Error {ticker}: {e}")
         return None
