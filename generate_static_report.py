@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import yfinance as yf
 import pandas as pd
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 # ===============================
 # 設定: 監視銘柄リスト
@@ -183,7 +183,9 @@ def process_ticker(code):
 # メイン処理
 # ===============================
 def main():
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    # JST (UTC+9) に変換
+    JST = timezone(timedelta(hours=9))
+    now_str = datetime.now(JST).strftime("%Y-%m-%d %H:%M")
     
     # ヘッダー
     full_html = f"""
