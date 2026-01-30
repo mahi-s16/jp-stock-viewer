@@ -211,7 +211,7 @@ def process_ticker(code):
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 {code} <span style="font-size:0.8em; color:#666;">{name}</span>
-                <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">終値: {price_display}</span>
+                <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: {price_display}</span>
             </h2>
             
             <div style="background:#f1f8e9; padding:8px; border-radius:4px; font-size:13px; margin-bottom:12px;">
