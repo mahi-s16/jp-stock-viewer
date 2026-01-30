@@ -134,22 +134,26 @@ def get_heat_score(ticker):
         # スコア計算
         score = current_vol / avg_vol if avg_vol > 0 else 0
         
-        # 前日価格差（%）
-        last_close = df["Close"].iloc[-1]
-        prev_close = df["Close"].iloc[0] # 簡易的に期間開始時と比較、またはyfから別途取得
-        # より正確な前日比のためにyf.Tickerを使う
-        try:
-            info = yf.Ticker(ticker).fast_info
-            change_pct = info.year_to_date # fast_infoで取れるものを活用
-            # info.change_percent があればそれがベスト
-        except:
-            change_pct = 0
+        # 前日比（%）を算出
+        # yf.download(period="2d", interval="1d") を使って前日終値を取得
+        df_daily = yf.download(ticker, period="3d", interval="1d", progress=False, threads=False)
+        change_pct = 0.0
+        if not df_daily.empty and len(df_daily) >= 2:
+            if isinstance(df_daily.columns, pd.MultiIndex):
+                df_daily.columns = df_daily.columns.get_level_values(0)
             
-        return round(score, 2), current_vol
+            # 最新の終値と、その1日前の終値
+            current_close = df_daily["Close"].iloc[-1]
+            prev_close = df_daily["Close"].iloc[-2]
+            
+            if prev_close > 0:
+                change_pct = ((current_close - prev_close) / prev_close) * 100
+            
+        return round(score, 2), current_vol, round(change_pct, 2)
         
     except Exception as e:
         print(f"Heat score error {ticker}: {e}")
-        return 0.0, 0.0
+        return 0.0, 0.0, 0.0
 
 def get_heat_color(score):
     """スコアに応じたヒートマップの色を返す"""
@@ -318,8 +322,8 @@ def process_ticker(code):
         vp_short, cur_short = calc_profile(ticker, "short")
         vp_mid, cur_mid = calc_profile(ticker, "mid")
         
-        # ヒートスコア取得
-        heat_score, last_vol = get_heat_score(ticker)
+        # ヒートスコア・騰落率取得
+        heat_score, last_vol, change_pct = get_heat_score(ticker)
         
         # RSI取得
         rsi_val = get_rsi(ticker)
@@ -371,10 +375,10 @@ def process_ticker(code):
         </div>
         """)
         
-        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist
+        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist, change_pct
         
     except Exception as e:
-        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0
+        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0, 0
 
 # ===============================
 # メイン処理
@@ -442,7 +446,7 @@ def main():
     ticker_results = []
     for code in TARGET_TICKERS:
         print(f"Processing {code}...")
-        html, score, name, price, rsi, wall_name, wall_dist = process_ticker(code)
+        html, score, name, price, rsi, wall_name, wall_dist, change_pct = process_ticker(code)
         ticker_results.append({
             "code": code,
             "html": html,
@@ -451,7 +455,8 @@ def main():
             "price": price,
             "rsi": rsi,
             "wall_name": wall_name,
-            "wall_dist": wall_dist
+            "wall_dist": wall_dist,
+            "change_pct": change_pct
         })
     
     # スコアでソート
@@ -460,13 +465,21 @@ def main():
     # ランキング行の生成
     ranking_rows = []
     for i, res in enumerate(ranking[:10]):
-        style = "font-weight:bold; color:#ff5252;" if res["score"] >= 2 else ""
+        heat_style = "font-weight:bold; color:#ff5252;" if res["score"] >= 2 else ""
+        
+        # 前日比の色付け
+        change_color = "#d32f2f" if res["change_pct"] > 0 else ("#388e3c" if res["change_pct"] < 0 else "#666")
+        change_sign = "+" if res["change_pct"] > 0 else ""
+        
         ranking_rows.append(f"""
         <tr>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">{i+1}</td>
             <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#{res['code']}">{res['code']}</a> <span style="font-size:0.8em; color:#666;">{res['name']}</span></td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; {style}">{res['score']}倍</td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">{int(res['price']):,}円</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; {heat_style}">{res['score']}倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
+                <span style="font-weight:bold;">{int(res['price']):,}円</span><br>
+                <span style="font-size:0.85em; color:{change_color};">{change_sign}{res['change_pct']}%</span>
+            </td>
         </tr>
         """)
     
