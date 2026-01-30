@@ -29,7 +29,7 @@ jobs:
 
       - name: Generate Report
         run: |
-          python generate_static_report.py 7203
+          python generate_static_report.py
           # index.html が生成される
 
       - name: Deploy to GitHub Pages
