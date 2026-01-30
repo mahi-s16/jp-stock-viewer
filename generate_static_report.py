@@ -165,6 +165,58 @@ def get_heat_color(score):
         return "#c8e6c9", "#388e3c" # 薄い緑（低調）
     return "#f5f5f5", "#ccc" # データなし
 
+def get_rsi(ticker, period="14d"):
+    """RSI(14)を算出"""
+    try:
+        # 過去1ヶ月分程度の日足データを取得
+        df = yf.download(ticker, period="1mo", interval="1d", progress=False, threads=False)
+        if df.empty or len(df) < 15:
+            return 50.0 # デフォルト
+            
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+            
+        delta = df["Close"].diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+        
+        rs = gain / loss
+        rsi = 100 - (100 / (1 + rs))
+        return round(rsi.iloc[-1], 1)
+    except Exception as e:
+        print(f"RSI error {ticker}: {e}")
+        return 50.0
+
+def get_wall_info(current_price, vp_data):
+    """最寄りの壁（しこり・真空）への距離を算出"""
+    try:
+        if not vp_data or current_price is None or current_price <= 0:
+            return "N/A", 0
+            
+        max_vol = max(v[1] for v in vp_data)
+        
+        # 上方向の壁を探す
+        # vp_dataは価格降順なので、下から上に見ていく
+        target_wall = None
+        for p, v in reversed(vp_data):
+            if p > current_price:
+                ratio = v / max_vol if max_vol > 0 else 0
+                if ratio >= 0.8: # 巨大なしこりレベル
+                    target_wall = (p, "しこり")
+                    break
+                elif ratio <= 0.1: # 真空地帯レベル
+                    target_wall = (p, "真空")
+                    break
+            
+        if target_wall:
+            p, wall_name = target_wall
+            dist_pct = ((p - current_price) / current_price) * 100
+            return wall_name, round(dist_pct, 1)
+            
+        return "真空", 5.0 # 上に明確な壁がない
+    except Exception as e:
+        return "Error", 0
+
 def calc_profile(ticker, mode="short"):
     period = "5d" if mode == "short" else "1mo"
     interval = "1m" if mode == "short" else "1d"
@@ -256,7 +308,6 @@ def process_ticker(code):
         # 日本語の銘柄名を取得
         name = get_japanese_name(ticker)
         if not name:
-            # フォールバック: yfinanceから英語名を取得
             try:
                 ticker_info = yf.Ticker(ticker)
                 name = ticker_info.info.get("shortName", code)
@@ -270,12 +321,19 @@ def process_ticker(code):
         # ヒートスコア取得
         heat_score, last_vol = get_heat_score(ticker)
         
-        # 終値が取得できなかった場合はyfinanceのデータをフォールバック
-        if current_price is None:
-            current_price = cur_short if cur_short > 0 else cur_mid
-            if current_price == 0:
-                current_price = 0  # データなし
+        # RSI取得
+        rsi_val = get_rsi(ticker)
         
+        # 壁への距離取得 (中期の壁を基準にする)
+        wall_name, wall_dist = get_wall_info(current_price, vp_mid)
+        
+        # 終値が取得できなかった場合はyfinanceのデータをフォールバック
+        if current_price is None or current_price == 0:
+            current_price = cur_short if (cur_short and cur_short > 0) else (cur_mid if (cur_mid and cur_mid > 0) else 0)
+        
+        # 数値化を保証
+        current_price = float(current_price) if current_price else 0.0
+
         # スパイク判定バッジ
         spike_badge = ""
         if heat_score >= 3.0:
@@ -313,10 +371,10 @@ def process_ticker(code):
         </div>
         """)
         
-        return "".join(html_parts), heat_score, name, current_price
+        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist
         
     except Exception as e:
-        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0
+        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0
 
 # ===============================
 # メイン処理
@@ -384,13 +442,16 @@ def main():
     ticker_results = []
     for code in TARGET_TICKERS:
         print(f"Processing {code}...")
-        html, score, name, price = process_ticker(code)
+        html, score, name, price, rsi, wall_name, wall_dist = process_ticker(code)
         ticker_results.append({
             "code": code,
             "html": html,
             "score": score,
             "name": name,
-            "price": price
+            "price": price,
+            "rsi": rsi,
+            "wall_name": wall_name,
+            "wall_dist": wall_dist
         })
     
     # スコアでソート
@@ -415,13 +476,25 @@ def main():
     heatmap_tiles = []
     for res in ticker_results:
         bg_color, text_color = get_heat_color(res["score"])
+        
+        # RSIの色付け
+        rsi_style = ""
+        if res["rsi"] >= 70: rsi_style = "color:#d32f2f; font-weight:bold;"
+        elif res["rsi"] <= 30: rsi_style = "color:#388e3c; font-weight:bold;"
+        
         heatmap_tiles.append(f"""
         <a href="#{res['code']}" style="text-decoration:none; color:inherit;">
-            <div style="background:{bg_color}; color:{text_color}; padding:10px; border-radius:6px; text-align:center; box-shadow:0 2px 4px rgba(0,0,0,0.05); transition:transform 0.2s;" 
-                 onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                <div style="font-weight:bold; font-size:14px;">{res['code']}</div>
-                <div style="font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0.9;">{res['name']}</div>
-                <div style="font-size:16px; font-weight:900; margin-top:4px;">{res['score']}x</div>
+            <div style="background:{bg_color}; color:{text_color}; padding:10px; border-radius:8px; text-align:center; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition:transform 0.2s; min-height:100px; display:flex; flex-direction:column; justify-content:space-between;" 
+                 onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+                <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">{res['code']}</div>
+                
+                <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">{res['score']}</span>x</div>
+                    <div title="壁までの距離" style="white-space:nowrap;">🚧 {res['wall_name']} <span style="font-weight:bold;">{res['wall_dist']}</span>%</div>
+                    <div title="RSI(14)">📊 RSI <span style="{rsi_style}">{res['rsi']}</span></div>
+                </div>
+                
+                <div style="font-size:9px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0.8; margin-top:6px;">{res['name']}</div>
             </div>
         </a>
         """)
