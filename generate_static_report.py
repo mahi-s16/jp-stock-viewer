@@ -37,17 +37,15 @@ def get_margin_balance(ticker):
         soup = BeautifulSoup(r.content, "html.parser")
         
         def get_val(label):
-            # "信用買残" などのテキストを持つ要素を探す
-            dt = soup.find("dt", string=re.compile(label))
-            if dt:
-                # 隣の dd を取得
+            # テキストノードを探してから、親のdtを取得する確実な方法
+            target_text = soup.find(string=re.compile(label))
+            if target_text and target_text.parent.name == "dt":
+                dt = target_text.parent
                 dd = dt.find_next_sibling("dd")
                 if dd:
-                    # 数値部分を取得
                     val_span = dd.find("span", class_=lambda c: c and "StyledNumber__value" in c)
                     if val_span:
                         return val_span.get_text(strip=True)
-                    # 倍率などは直下のテキストにある場合も
                     return dd.get_text(strip=True)
             return "-"
 
