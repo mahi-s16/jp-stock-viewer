@@ -471,10 +471,20 @@ def main():
         change_color = "#d32f2f" if res["change_pct"] > 0 else ("#388e3c" if res["change_pct"] < 0 else "#666")
         change_sign = "+" if res["change_pct"] > 0 else ""
         
+        # ステータスバッジの生成 (ランキング用)
+        badge = ""
+        if res["score"] >= 3.0:
+            badge = '<span style="background:#ff5252; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">🔥 急騰</span>'
+        elif res["score"] >= 1.5:
+            badge = '<span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span>'
+        
         ranking_rows.append(f"""
         <tr>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">{i+1}</td>
-            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#{res['code']}">{res['code']}</a> <span style="font-size:0.8em; color:#666;">{res['name']}</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee;">
+                <a href="#{res['code']}" style="font-weight:bold; text-decoration:none; color:#1565c0;">{res['code']}</a> {badge}<br>
+                <span style="font-size:0.8em; color:#666;">{res['name']}</span>
+            </td>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; {heat_style}">{res['score']}倍</td>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
                 <span style="font-weight:bold;">{int(res['price']):,}円</span><br>
