@@ -5,6 +5,8 @@ on:
     # 日本時間 9:00 - 15:00 の間、15分ごとに実行 (UTC 0:00 - 6:00)
     - cron: '*/15 0-6 * * 1-5'
   workflow_dispatch: # 手動実行ボタンも有効化
+  push: # コード更新時にも即実行
+    branches: ["main"]
 
 jobs:
   build:
