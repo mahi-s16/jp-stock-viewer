@@ -65,6 +65,40 @@ def get_margin_balance(ticker):
         print(f"Margin Error {ticker}: {e}")
         return {"buy": "-", "sell": "-", "ratio": "-", "date": ""}
 
+def get_current_price(ticker):
+    """Yahoo!ファイナンスから正確な終値を取得"""
+    url = f"https://finance.yahoo.co.jp/quote/{ticker}"
+    try:
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
+        soup = BeautifulSoup(r.content, "html.parser")
+        
+        # 終値を探す（複数の方法を試す）
+        # 方法1: data-test属性で探す
+        price_elem = soup.find("span", {"data-test": "quote-price"})
+        if price_elem:
+            price_text = price_elem.get_text(strip=True).replace(",", "")
+            return float(price_text)
+        
+        # 方法2: クラス名で探す
+        price_elem = soup.find("span", class_=lambda c: c and "StockPrice" in c)
+        if price_elem:
+            price_text = price_elem.get_text(strip=True).replace(",", "")
+            return float(price_text)
+            
+        # 方法3: テキスト検索
+        price_section = soup.find(string=re.compile("現在値"))
+        if price_section:
+            parent = price_section.parent.parent
+            price_span = parent.find("span", class_=lambda c: c and "value" in c.lower() if c else False)
+            if price_span:
+                price_text = price_span.get_text(strip=True).replace(",", "")
+                return float(price_text)
+        
+        return None
+    except Exception as e:
+        print(f"Price Error {ticker}: {e}")
+        return None
+
 def calc_profile(ticker, mode="short"):
     period = "5d" if mode == "short" else "1mo"
     interval = "1m" if mode == "short" else "1d"
@@ -150,9 +184,11 @@ def process_ticker(code):
     try:
         ticker = f"{code}" if ".T" in code else f"{code}.T"
         
-        # 株価情報（銘柄名用） - 簡易的
+        # 正確な終値を取得
+        current_price = get_current_price(ticker)
+        
+        # 株価情報（銘柄名用）
         ticker_info = yf.Ticker(ticker)
-        # yfinanceでの銘柄名取得は遅い・不安定なことがあるのでコードで代用推奨だが、一応try
         try:
             name = ticker_info.info.get("shortName", code)
         except:
@@ -162,14 +198,20 @@ def process_ticker(code):
         vp_short, cur_short = calc_profile(ticker, "short")
         vp_mid, cur_mid = calc_profile(ticker, "mid")
         
-        cur_price = cur_short if cur_short > 0 else cur_mid
+        # 終値が取得できなかった場合はyfinanceのデータをフォールバック
+        if current_price is None:
+            current_price = cur_short if cur_short > 0 else cur_mid
+            if current_price == 0:
+                current_price = 0  # データなし
         
         # 各銘柄のブロックHTML
+        price_display = f"{int(current_price):,}円" if current_price > 0 else "データなし"
+        
         html_parts.append(f"""
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 {code} <span style="font-size:0.8em; color:#666;">{name}</span>
-                <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: {int(cur_price):,}円</span>
+                <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">終値: {price_display}</span>
             </h2>
             
             <div style="background:#f1f8e9; padding:8px; border-radius:4px; font-size:13px; margin-bottom:12px;">
@@ -181,10 +223,10 @@ def process_ticker(code):
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
                 <div style="flex:1; min-width:300px;">
-                    {generate_table_html(vp_short, cur_price, "⚡️ 短期 (1週/1分足)")}
+                    {generate_table_html(vp_short, current_price, "⚡️ 短期 (1週/1分足)")}
                 </div>
                 <div style="flex:1; min-width:300px;">
-                    {generate_table_html(vp_mid, cur_price, "📅 中期 (1ヶ月/日足)")}
+                    {generate_table_html(vp_mid, current_price, "📅 中期 (1ヶ月/日足)")}
                 </div>
             </div>
         </div>
