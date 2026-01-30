@@ -2,8 +2,8 @@ name: Auto Update Stock Report
 
 on:
   schedule:
-    # 日本時間 9:00 - 15:00 の間、1時間ごとに実行 (UTC 0:00 - 6:00)
-    - cron: '0 0-6 * * 1-5'
+    # 日本時間 9:00 - 15:00 の間、15分ごとに実行 (UTC 0:00 - 6:00)
+    - cron: '*/15 0-6 * * 1-5'
   workflow_dispatch: # 手動実行ボタンも有効化
 
 jobs:
