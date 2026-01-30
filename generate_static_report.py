@@ -151,6 +151,20 @@ def get_heat_score(ticker):
         print(f"Heat score error {ticker}: {e}")
         return 0.0, 0.0
 
+def get_heat_color(score):
+    """スコアに応じたヒートマップの色を返す"""
+    if score >= 3.0:
+        return "#ff5252", "#fff" # 鮮やかな赤
+    elif score >= 2.0:
+        return "#ff9800", "#fff" # オレンジ
+    elif score >= 1.5:
+        return "#ffd740", "#333" # 黄色
+    elif score >= 1.0:
+        return "#e0e0e0", "#666" # グレー（標準）
+    elif score > 0:
+        return "#c8e6c9", "#388e3c" # 薄い緑（低調）
+    return "#f5f5f5", "#ccc" # データなし
+
 def calc_profile(ticker, mode="short"):
     period = "5d" if mode == "short" else "1mo"
     interval = "1m" if mode == "short" else "1d"
@@ -335,6 +349,14 @@ def main():
         <h1>📊 株需給レポート一括確認</h1>
         <p style="text-align:center; color:#666; font-size:12px;">更新: {now_str}</p>
         
+        <!-- ヒートマップセクション -->
+        <div id="heatmap-container" style="margin-bottom:24px;">
+            <h3 style="margin-top:0; color:#333;">🌡️ 13銘柄ヒートマップ (勢い)</h3>
+            <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:8px;">
+                <!-- ヒートマップタイルがここに挿入される -->
+            </div>
+        </div>
+
         <!-- ランキングセクション -->
         <div id="heat-ranking" style="background:#fff; border:2px solid #ff5252; border-radius:8px; padding:16px; margin-bottom:24px;">
             <h3 style="margin-top:0; color:#ff5252;">🔥 資金流入スピード・ランキング (直近5分)</h3>
@@ -388,6 +410,23 @@ def main():
         """)
     
     full_html = full_html.replace('<!-- JSまたはPythonで挿入 -->', "".join(ranking_rows))
+
+    # ヒートマップタイルの生成
+    heatmap_tiles = []
+    for res in ticker_results:
+        bg_color, text_color = get_heat_color(res["score"])
+        heatmap_tiles.append(f"""
+        <a href="#{res['code']}" style="text-decoration:none; color:inherit;">
+            <div style="background:{bg_color}; color:{text_color}; padding:10px; border-radius:6px; text-align:center; box-shadow:0 2px 4px rgba(0,0,0,0.05); transition:transform 0.2s;" 
+                 onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <div style="font-weight:bold; font-size:14px;">{res['code']}</div>
+                <div style="font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0.9;">{res['name']}</div>
+                <div style="font-size:16px; font-weight:900; margin-top:4px;">{res['score']}x</div>
+            </div>
+        </a>
+        """)
+    
+    full_html = full_html.replace('<!-- ヒートマップタイルがここに挿入される -->', "".join(heatmap_tiles))
 
     for res in ticker_results:
         full_html += f'<div id="{res["code"]}">'
