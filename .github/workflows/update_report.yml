@@ -1,0 +1,41 @@
+name: Auto Update Stock Report
+
+on:
+  schedule:
+    # 日本時間 9:00 - 15:00 の間、1時間ごとに実行 (UTC 0:00 - 6:00)
+    - cron: '0 0-6 * * 1-5'
+  workflow_dispatch: # 手動実行ボタンも有効化
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas yfinance requests beautifulsoup4 argparse lxml
+
+      - name: Generate Report
+        run: |
+          python generate_static_report.py 7203
+          # index.html が生成される
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          keep_files: true # 履歴を残すか（任意）
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
