@@ -18,8 +18,96 @@
     </head>
     <body>
         <h1>📊 株需給レポート一括確認</h1>
-        <p style="text-align:center; color:#666; font-size:12px;">更新: 2026-01-30 22:17</p>
+        <p style="text-align:center; color:#666; font-size:12px;">更新: 2026-01-30 22:38</p>
         
+        <!-- ランキングセクション -->
+        <div id="heat-ranking" style="background:#fff; border:2px solid #ff5252; border-radius:8px; padding:16px; margin-bottom:24px;">
+            <h3 style="margin-top:0; color:#ff5252;">🔥 資金流入スピード・ランキング (直近5分)</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead style="background:#fee2e2;">
+                    <tr>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">順位</th>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">銘柄</th>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">勢いスコア</th>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">現在値</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-body">
+                    
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">1</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#6701.T">6701.T</a> <span style="font-size:0.8em; color:#666;">ＮＥＣ</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; font-weight:bold; color:#ff5252;">3.44倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">5,210円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">2</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#6501.T">6501.T</a> <span style="font-size:0.8em; color:#666;">日立製作所</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; font-weight:bold; color:#ff5252;">2.55倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">5,361円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">3</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#3778.T">3778.T</a> <span style="font-size:0.8em; color:#666;">さくらインターネット</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; font-weight:bold; color:#ff5252;">2.3倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">2,658円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">4</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#8593.T">8593.T</a> <span style="font-size:0.8em; color:#666;">三菱ＨＣキャピタル</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.85倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">1,349円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">5</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#1969.T">1969.T</a> <span style="font-size:0.8em; color:#666;">高砂熱学工業</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.83倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">4,470円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">6</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#186A.T">186A.T</a> <span style="font-size:0.8em; color:#666;">アストロスケールホールディングス</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.78倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">1,084円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">7</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#4259.T">4259.T</a> <span style="font-size:0.8em; color:#666;">エクサウィザーズ</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.46倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">716円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">8</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#8306.T">8306.T</a> <span style="font-size:0.8em; color:#666;">三菱ＵＦＪフィナンシャル・グループ</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.41倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">2,804円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">9</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#285A.T">285A.T</a> <span style="font-size:0.8em; color:#666;">キオクシアホールディングス</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.36倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">21,360円</td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">10</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#7011.T">7011.T</a> <span style="font-size:0.8em; color:#666;">三菱重工業</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.13倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">4,519円</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+
         <div class="nav">
             <a href="#285A.T">285A.T</a> <a href="#9348.T">9348.T</a> <a href="#7011.T">7011.T</a> <a href="#8306.T">8306.T</a> <a href="#6501.T">6501.T</a> <a href="#6701.T">6701.T</a> <a href="#8593.T">8593.T</a> <a href="#1969.T">1969.T</a> <a href="#2749.T">2749.T</a> <a href="#186A.T">186A.T</a> <a href="#4259.T">4259.T</a> <a href="#3778.T">3778.T</a> <a href="#5572.T">5572.T</a>
         </div>
@@ -27,6 +115,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 285A.T <span style="font-size:0.8em; color:#666;">キオクシアホールディングス</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 21,360円</span>
             </h2>
             
@@ -34,7 +123,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 12,422,900</span> / 
                 <span style="color:#1976d2;">売残 1,692,200</span> / 
-                倍率 7.34倍
+                倍率 7.34倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.36倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -262,6 +352,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 9348.T <span style="font-size:0.8em; color:#666;">ｉｓｐａｃｅ</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 587円</span>
             </h2>
             
@@ -269,7 +360,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 5,326,100</span> / 
                 <span style="color:#1976d2;">売残 0</span> / 
-                倍率 0.00倍
+                倍率 0.00倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.54倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -485,6 +577,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 7011.T <span style="font-size:0.8em; color:#666;">三菱重工業</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 4,519円</span>
             </h2>
             
@@ -492,7 +585,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 17,098,700</span> / 
                 <span style="color:#1976d2;">売残 3,251,000</span> / 
-                倍率 5.26倍
+                倍率 5.26倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.13倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -708,6 +802,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 8306.T <span style="font-size:0.8em; color:#666;">三菱ＵＦＪフィナンシャル・グループ</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 2,804円</span>
             </h2>
             
@@ -715,7 +810,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 31,424,600</span> / 
                 <span style="color:#1976d2;">売残 4,721,800</span> / 
-                倍率 6.66倍
+                倍率 6.66倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.41倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -943,6 +1039,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 6501.T <span style="font-size:0.8em; color:#666;">日立製作所</span>
+                <span style="background:#ff9800; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">⚡️ 活性化</span>
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 5,361円</span>
             </h2>
             
@@ -950,7 +1047,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 5,068,900</span> / 
                 <span style="color:#1976d2;">売残 552,200</span> / 
-                倍率 9.18倍
+                倍率 9.18倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#d32f2f;">2.55倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1172,6 +1270,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 6701.T <span style="font-size:0.8em; color:#666;">ＮＥＣ</span>
+                <span style="background:#ff5252; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">🔥 出来高急騰!</span>
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 5,210円</span>
             </h2>
             
@@ -1179,7 +1278,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 3,164,800</span> / 
                 <span style="color:#1976d2;">売残 284,800</span> / 
-                倍率 11.11倍
+                倍率 11.11倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#d32f2f;">3.44倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1395,6 +1495,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 8593.T <span style="font-size:0.8em; color:#666;">三菱ＨＣキャピタル</span>
+                <span style="background:#ff9800; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">⚡️ 活性化</span>
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 1,349円</span>
             </h2>
             
@@ -1402,7 +1503,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 2,687,800</span> / 
                 <span style="color:#1976d2;">売残 123,600</span> / 
-                倍率 21.75倍
+                倍率 21.75倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.85倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1618,6 +1720,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 1969.T <span style="font-size:0.8em; color:#666;">高砂熱学工業</span>
+                <span style="background:#ff9800; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">⚡️ 活性化</span>
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 4,470円</span>
             </h2>
             
@@ -1625,7 +1728,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 212,600</span> / 
                 <span style="color:#1976d2;">売残 42,000</span> / 
-                倍率 5.06倍
+                倍率 5.06倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.83倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1853,6 +1957,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 2749.T <span style="font-size:0.8em; color:#666;">ＪＰホールディングス</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 699円</span>
             </h2>
             
@@ -1860,7 +1965,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 242,400</span> / 
                 <span style="color:#1976d2;">売残 1,772,100</span> / 
-                倍率 0.14倍
+                倍率 0.14倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.53倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -2088,6 +2194,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 186A.T <span style="font-size:0.8em; color:#666;">アストロスケールホールディングス</span>
+                <span style="background:#ff9800; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">⚡️ 活性化</span>
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 1,084円</span>
             </h2>
             
@@ -2095,7 +2202,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 6,993,800</span> / 
                 <span style="color:#1976d2;">売残 1,379,300</span> / 
-                倍率 5.07倍
+                倍率 5.07倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.78倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -2311,6 +2419,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 4259.T <span style="font-size:0.8em; color:#666;">エクサウィザーズ</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 716円</span>
             </h2>
             
@@ -2318,7 +2427,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 4,784,900</span> / 
                 <span style="color:#1976d2;">売残 7,000</span> / 
-                倍率 683.56倍
+                倍率 683.56倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.46倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -2528,6 +2638,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 3778.T <span style="font-size:0.8em; color:#666;">さくらインターネット</span>
+                <span style="background:#ff9800; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">⚡️ 活性化</span>
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 2,658円</span>
             </h2>
             
@@ -2535,7 +2646,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 2,821,800</span> / 
                 <span style="color:#1976d2;">売残 1,985,500</span> / 
-                倍率 1.42倍
+                倍率 1.42倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#d32f2f;">2.3倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -2727,6 +2839,7 @@
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 5572.T <span style="font-size:0.8em; color:#666;">Ｒｉｄｇｅ－ｉ</span>
+                
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: 2,100円</span>
             </h2>
             
@@ -2734,7 +2847,8 @@
                 <strong>信用需給 (01/23)</strong>: 
                 <span style="color:#d32f2f;">買残 223,800</span> / 
                 <span style="color:#1976d2;">売残 0</span> / 
-                倍率 0.00倍
+                倍率 0.00倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.29倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">

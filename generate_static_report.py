@@ -114,6 +114,43 @@ def get_japanese_name(ticker):
         print(f"Japanese name error {ticker}: {e}")
         return None
 
+def get_heat_score(ticker):
+    """出来高の急増度（ヒートスコア）を算出"""
+    try:
+        # 直近5日間の5分足データを取得
+        df = yf.download(ticker, period="5d", interval="5m", progress=False, threads=False)
+        if df.empty or len(df) < 20:
+            return 0.0, 0.0
+            
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+            
+        # 平均出来高（ベースライン）を算出
+        avg_vol = df["Volume"].mean()
+        
+        # 直近の出来高（最新の5分足1本分）
+        current_vol = df["Volume"].iloc[-1]
+        
+        # スコア計算
+        score = current_vol / avg_vol if avg_vol > 0 else 0
+        
+        # 前日価格差（%）
+        last_close = df["Close"].iloc[-1]
+        prev_close = df["Close"].iloc[0] # 簡易的に期間開始時と比較、またはyfから別途取得
+        # より正確な前日比のためにyf.Tickerを使う
+        try:
+            info = yf.Ticker(ticker).fast_info
+            change_pct = info.year_to_date # fast_infoで取れるものを活用
+            # info.change_percent があればそれがベスト
+        except:
+            change_pct = 0
+            
+        return round(score, 2), current_vol
+        
+    except Exception as e:
+        print(f"Heat score error {ticker}: {e}")
+        return 0.0, 0.0
+
 def calc_profile(ticker, mode="short"):
     period = "5d" if mode == "short" else "1mo"
     interval = "1m" if mode == "short" else "1d"
@@ -216,12 +253,22 @@ def process_ticker(code):
         vp_short, cur_short = calc_profile(ticker, "short")
         vp_mid, cur_mid = calc_profile(ticker, "mid")
         
+        # ヒートスコア取得
+        heat_score, last_vol = get_heat_score(ticker)
+        
         # 終値が取得できなかった場合はyfinanceのデータをフォールバック
         if current_price is None:
             current_price = cur_short if cur_short > 0 else cur_mid
             if current_price == 0:
                 current_price = 0  # データなし
         
+        # スパイク判定バッジ
+        spike_badge = ""
+        if heat_score >= 3.0:
+            spike_badge = '<span style="background:#ff5252; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">🔥 出来高急騰!</span>'
+        elif heat_score >= 1.5:
+            spike_badge = '<span style="background:#ff9800; color:white; padding:2px 8px; border-radius:12px; font-size:0.5em; vertical-align:middle; margin-left:8px;">⚡️ 活性化</span>'
+
         # 各銘柄のブロックHTML
         price_display = f"{int(current_price):,}円" if current_price > 0 else "データなし"
         
@@ -229,6 +276,7 @@ def process_ticker(code):
         <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
             <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
                 {code} <span style="font-size:0.8em; color:#666;">{name}</span>
+                {spike_badge}
                 <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: {price_display}</span>
             </h2>
             
@@ -236,7 +284,8 @@ def process_ticker(code):
                 <strong>信用需給 ({margin['date']})</strong>: 
                 <span style="color:#d32f2f;">買残 {margin['buy']}</span> / 
                 <span style="color:#1976d2;">売残 {margin['sell']}</span> / 
-                倍率 {margin['ratio']}倍
+                倍率 {margin['ratio']}倍 | 
+                <strong>勢い</strong>: <span style="font-weight:bold; color:{'#d32f2f' if heat_score >= 2 else '#333'};">{heat_score}倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -250,10 +299,10 @@ def process_ticker(code):
         </div>
         """)
         
-    except Exception as e:
-        html_parts.append(f'<div style="color:red">Error processing {code}: {e}</div>')
+        return "".join(html_parts), heat_score, name, current_price
         
-    return "".join(html_parts)
+    except Exception as e:
+        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0
 
 # ===============================
 # メイン処理
@@ -286,16 +335,63 @@ def main():
         <h1>📊 株需給レポート一括確認</h1>
         <p style="text-align:center; color:#666; font-size:12px;">更新: {now_str}</p>
         
+        <!-- ランキングセクション -->
+        <div id="heat-ranking" style="background:#fff; border:2px solid #ff5252; border-radius:8px; padding:16px; margin-bottom:24px;">
+            <h3 style="margin-top:0; color:#ff5252;">🔥 資金流入スピード・ランキング (直近5分)</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead style="background:#fee2e2;">
+                    <tr>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">順位</th>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">銘柄</th>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">勢いスコア</th>
+                        <th style="padding:8px; border-bottom:2px solid #ff5252;">現在値</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-body">
+                    <!-- JSまたはPythonで挿入 -->
+                </tbody>
+            </table>
+        </div>
+
         <div class="nav">
             {' '.join([f'<a href="#{t}">{t}</a>' for t in TARGET_TICKERS])}
         </div>
     """
     
     # 各銘柄の処理
+    ticker_results = []
     for code in TARGET_TICKERS:
         print(f"Processing {code}...")
-        full_html += f'<div id="{code}">'
-        full_html += process_ticker(code)
+        html, score, name, price = process_ticker(code)
+        ticker_results.append({
+            "code": code,
+            "html": html,
+            "score": score,
+            "name": name,
+            "price": price
+        })
+    
+    # スコアでソート
+    ranking = sorted(ticker_results, key=lambda x: x["score"], reverse=True)
+    
+    # ランキング行の生成
+    ranking_rows = []
+    for i, res in enumerate(ranking[:10]):
+        style = "font-weight:bold; color:#ff5252;" if res["score"] >= 2 else ""
+        ranking_rows.append(f"""
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">{i+1}</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;"><a href="#{res['code']}">{res['code']}</a> <span style="font-size:0.8em; color:#666;">{res['name']}</span></td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; {style}">{res['score']}倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">{int(res['price']):,}円</td>
+        </tr>
+        """)
+    
+    full_html = full_html.replace('<!-- JSまたはPythonで挿入 -->', "".join(ranking_rows))
+
+    for res in ticker_results:
+        full_html += f'<div id="{res["code"]}">'
+        full_html += res["html"]
         full_html += '</div>'
         
     # フッター
