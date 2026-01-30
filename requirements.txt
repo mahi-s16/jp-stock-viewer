@@ -1,0 +1,9 @@
+dash
+pandas
+yfinance
+plotly
+gunicorn
+openpyxl
+beautifulsoup4==4.12.3
+requests==2.32.3
+requests-cache==1.2.1
