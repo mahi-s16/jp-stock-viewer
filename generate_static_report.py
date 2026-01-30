@@ -8,7 +8,16 @@ import numpy as np
 from datetime import datetime
 
 # ===============================
-# ロジック（app.pyから流用）
+# 設定: 監視銘柄リスト
+# ===============================
+TARGET_TICKERS = [
+    "285A.T", "9348.T", "7011.T", "8306.T", "6501.T", 
+    "6701.T", "8593.T", "1961.T", "2749.T", "186A.T", 
+    "4259.T", "3778.T", "5533.T"
+]
+
+# ===============================
+# ロジック
 # ===============================
 def analyze_volume_zone(vol, max_vol):
     ratio = vol / max_vol if max_vol > 0 else 0
@@ -26,31 +35,34 @@ def get_margin_balance(ticker):
     try:
         r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
         text = r.text
-        # 簡易スクレイピング
         m_buy = re.search(r"信用買残([\d,]+)株", text)
         m_sell = re.search(r"信用売残([\d,]+)株", text)
         m_ratio = re.search(r"信用倍率([\d,.]+)倍", text)
+        date = re.search(r"\(([\d/]+)\)", text)
+        
         return {
             "buy": m_buy.group(1) if m_buy else "-",
             "sell": m_sell.group(1) if m_sell else "-",
-            "ratio": m_ratio.group(1) if m_ratio else "-"
+            "ratio": m_ratio.group(1) if m_ratio else "-",
+            "date": date.group(1) if date else ""
         }
     except:
-        return {"buy": "-", "sell": "-", "ratio": "-"}
+        return {"buy": "-", "sell": "-", "ratio": "-", "date": ""}
 
 def calc_profile(ticker, mode="short"):
     period = "5d" if mode == "short" else "1mo"
     interval = "1m" if mode == "short" else "1d"
-    
     try:
-        df = yf.download(ticker, period=period, interval=interval, progress=False)
+        df = yf.download(ticker, period=period, interval=interval, progress=False, threads=False)
         if df.empty: return []
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
-            
+        
         price = df["Close"]
         volume = df["Volume"]
-        bins = np.linspace(price.min(), price.max(), 31)
+        current = price.iloc[-1]
+        
+        bins = np.linspace(price.min(), price.max(), 31) # 30区間
         indices = np.digitize(price, bins) - 1
         
         profile = {}
@@ -59,11 +71,12 @@ def calc_profile(ticker, mode="short"):
                 p_key = int((bins[i] + bins[i+1])/2)
                 profile[p_key] = profile.get(p_key, 0) + vol
                 
-        return sorted(profile.items(), key=lambda x: x[0], reverse=True)
+        sorted_profile = sorted(profile.items(), key=lambda x: x[0], reverse=True)
+        return sorted_profile, current
     except:
-        return []
+        return [], 0
 
-def generate_table_html(profile, title):
+def generate_table_html(profile, current_price, title):
     if not profile: return f"<p>{title}: データなし</p>"
     
     max_vol = max(p[1] for p in profile)
@@ -79,25 +92,32 @@ def generate_table_html(profile, title):
         
         lower = int(p - bin_width/2)
         upper = int(p + bin_width/2)
+        
+        # 現在値の強調
+        row_style = ""
         eval_text = analyze_volume_zone(v, max_vol)
         
+        if lower <= current_price < upper:
+            row_style = "background-color: #e3f2fd;" # 現在値付近を青く
+            eval_text += ' <span style="font-weight:bold; color:#1565c0;">📍 現在値</span>'
+
         rows.append(f"""
-        <tr>
-            <td style="padding:8px; border:1px solid #ddd; text-align:center;">{lower:,} - {upper:,}</td>
-            <td style="padding:8px; border:1px solid #ddd; text-align:right;">{v:,}</td>
-            <td style="padding:8px; border:1px solid #ddd;">{eval_text}</td>
+        <tr style="{row_style}">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">{lower:,} - {upper:,}</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">{v:,}</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;">{eval_text}</td>
         </tr>
         """)
         
     return f"""
-    <div style="margin-bottom: 24px;">
-        <h3 style="border-left: 4px solid #2196F3; padding-left: 8px; margin-bottom: 8px;">{title}</h3>
-        <table style="width:100%; border-collapse:collapse; font-size:14px;">
-            <thead style="background-color:#f5f5f5;">
+    <div style="margin-bottom: 16px;">
+        <h4 style="margin: 8px 0 4px 0; font-size:14px; color:#555;">{title}</h4>
+        <table style="width:100%; border-collapse:collapse;">
+            <thead style="background-color:#f8fafc;">
                 <tr>
-                    <th style="padding:8px; border:1px solid #ccc;">価格帯 (円)</th>
-                    <th style="padding:8px; border:1px solid #ccc;">出来高 (株)</th>
-                    <th style="padding:8px; border:1px solid #ccc;">評価</th>
+                    <th style="padding:6px; border:1px solid #ddd; font-size:12px;">価格帯</th>
+                    <th style="padding:6px; border:1px solid #ddd; font-size:12px;">出来高</th>
+                    <th style="padding:6px; border:1px solid #ddd; font-size:12px;">評価</th>
                 </tr>
             </thead>
             <tbody>
@@ -107,51 +127,110 @@ def generate_table_html(profile, title):
     </div>
     """
 
+def process_ticker(code):
+    html_parts = []
+    
+    # データ取得
+    try:
+        ticker = f"{code}" if ".T" in code else f"{code}.T"
+        
+        # 株価情報（銘柄名用） - 簡易的
+        ticker_info = yf.Ticker(ticker)
+        # yfinanceでの銘柄名取得は遅い・不安定なことがあるのでコードで代用推奨だが、一応try
+        try:
+            name = ticker_info.info.get("shortName", code)
+        except:
+            name = code
+            
+        margin = get_margin_balance(ticker)
+        vp_short, cur_short = calc_profile(ticker, "short")
+        vp_mid, cur_mid = calc_profile(ticker, "mid")
+        
+        cur_price = cur_short if cur_short > 0 else cur_mid
+        
+        # 各銘柄のブロックHTML
+        html_parts.append(f"""
+        <div class="ticker-card" style="border: 2px solid #333; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+            <h2 style="margin-top:0; border-bottom: 2px solid #2196F3; padding-bottom: 8px;">
+                {code} <span style="font-size:0.8em; color:#666;">{name}</span>
+                <span style="float:right; font-size:0.6em; font-weight:normal; margin-top:8px;">現在値: {int(cur_price):,}円</span>
+            </h2>
+            
+            <div style="background:#f1f8e9; padding:8px; border-radius:4px; font-size:13px; margin-bottom:12px;">
+                <strong>信用需給 ({margin['date']})</strong>: 
+                <span style="color:#d32f2f;">買残 {margin['buy']}</span> / 
+                <span style="color:#1976d2;">売残 {margin['sell']}</span> / 
+                倍率 {margin['ratio']}倍
+            </div>
+            
+            <div style="display:flex; flex-wrap:wrap; gap:16px;">
+                <div style="flex:1; min-width:300px;">
+                    {generate_table_html(vp_short, cur_price, "⚡️ 短期 (1週/1分足)")}
+                </div>
+                <div style="flex:1; min-width:300px;">
+                    {generate_table_html(vp_mid, cur_price, "📅 中期 (1ヶ月/日足)")}
+                </div>
+            </div>
+        </div>
+        """)
+        
+    except Exception as e:
+        html_parts.append(f'<div style="color:red">Error processing {code}: {e}</div>')
+        
+    return "".join(html_parts)
+
 # ===============================
 # メイン処理
 # ===============================
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("code", default="7203", nargs="?", help="Ticker Code (e.g. 7203)")
-    args = parser.parse_args()
-    
-    ticker = f"{args.code}.T" if not args.code.endswith(".T") and args.code.isdigit() else args.code
-    margin = get_margin_balance(ticker)
-    vp_short = calc_profile(ticker, "short")
-    vp_mid = calc_profile(ticker, "mid")
-    
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
     
-    html_content = f"""
+    # ヘッダー
+    full_html = f"""
     <!DOCTYPE html>
     <html lang="ja">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{args.code} 需給レポート</title>
-        <style>body {{ font-family: sans-serif; padding: 16px; max-width: 800px; margin: 0 auto; line-height: 1.6; }}</style>
+        <title>需給レポート一覧</title>
+        <style>
+            body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; padding: 10px; max-width: 900px; margin: 0 auto; background-color: #fcfcfc; }}
+            h1 {{ text-align: center; color: #333; }}
+            .nav {{ text-align: center; margin-bottom: 20px; }}
+            .nav a {{ margin: 0 5px; color: #2196F3; text-decoration: none; font-size: 14px; }}
+            @media (max-width: 600px) {{
+                .ticker-card {{ padding: 8px !important; }}
+                h2 {{ font-size: 1.2em; }}
+            }}
+        </style>
     </head>
     <body>
-        <h1>📊 {args.code} 需給レポート</h1>
-        <p style="color:#666; font-size:12px; text-align:right;">作成日時: {now_str}</p>
+        <h1>📊 株需給レポート一括確認</h1>
+        <p style="text-align:center; color:#666; font-size:12px;">更新: {now_str}</p>
         
-        <div style="background:#f8f9fa; padding:12px; border-radius:4px; border:1px solid #ddd; margin-bottom:20px;">
-            <strong>信用情報</strong><br>
-            買残: {margin['buy']}株 / 売残: {margin['sell']}株 / 倍率: {margin['ratio']}倍
+        <div class="nav">
+            {' '.join([f'<a href="#{t}">{t}</a>' for t in TARGET_TICKERS])}
         </div>
+    """
+    
+    # 各銘柄の処理
+    for code in TARGET_TICKERS:
+        print(f"Processing {code}...")
+        full_html += f'<div id="{code}">'
+        full_html += process_ticker(code)
+        full_html += '</div>'
         
-        {generate_table_html(vp_short, "直近1週間 (短期・1分足ベース)")}
-        {generate_table_html(vp_mid, "直近1ヶ月 (中期・日足ベース)")}
-        
+    # フッター
+    full_html += """
     </body>
     </html>
     """
     
     filename = "index.html"
     with open(filename, "w", encoding="utf-8") as f:
-        f.write(html_content)
+        f.write(full_html)
         
-    print(f"Successfully generated {filename}")
+    print(f"Successfully generated {filename} with check for {len(TARGET_TICKERS)} tickers.")
 
 if __name__ == "__main__":
     main()
