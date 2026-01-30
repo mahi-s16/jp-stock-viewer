@@ -34,19 +34,37 @@ def get_margin_balance(ticker):
     url = f"https://finance.yahoo.co.jp/quote/{ticker}"
     try:
         r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
-        text = r.text
-        m_buy = re.search(r"信用買残([\d,]+)株", text)
-        m_sell = re.search(r"信用売残([\d,]+)株", text)
-        m_ratio = re.search(r"信用倍率([\d,.]+)倍", text)
-        date = re.search(r"\(([\d/]+)\)", text)
+        soup = BeautifulSoup(r.content, "html.parser")
         
+        def get_val(label):
+            # "信用買残" などのテキストを持つ要素を探す
+            dt = soup.find("dt", string=re.compile(label))
+            if dt:
+                # 隣の dd を取得
+                dd = dt.find_next_sibling("dd")
+                if dd:
+                    # 数値部分を取得
+                    val_span = dd.find("span", class_=lambda c: c and "StyledNumber__value" in c)
+                    if val_span:
+                        return val_span.get_text(strip=True)
+                    # 倍率などは直下のテキストにある場合も
+                    return dd.get_text(strip=True)
+            return "-"
+
+        # 日付取得
+        date_span = soup.find("span", class_=lambda c: c and "MarginTransactionInformation__date" in c)
+        date_str = date_span.get_text(strip=True) if date_span else ""
+        date_str = date_str.replace("(", "").replace(")", "") # (01/23) -> 01/23
+
         return {
-            "buy": m_buy.group(1) if m_buy else "-",
-            "sell": m_sell.group(1) if m_sell else "-",
-            "ratio": m_ratio.group(1) if m_ratio else "-",
-            "date": date.group(1) if date else ""
+            "buy": get_val("信用買残"),
+            "sell": get_val("信用売残"),
+            "ratio": get_val("信用倍率"),
+            "date": date_str
         }
-    except:
+
+    except Exception as e:
+        print(f"Margin Error {ticker}: {e}")
         return {"buy": "-", "sell": "-", "ratio": "-", "date": ""}
 
 def calc_profile(ticker, mode="short"):
