@@ -344,10 +344,18 @@ def process_ticker(code):
         vp_mid, cur_mid = calc_profile(ticker, "mid")
         
         # ヒートスコア・騰落率取得
-        heat_score, last_vol, change_pct = get_heat_score(ticker)
+        try:
+            heat_score, last_vol, change_pct = get_heat_score(ticker)
+        except Exception as e:
+            print(f"Failed to unpack heat score for {ticker}: {e}")
+            heat_score, last_vol, change_pct = 0.0, 0.0, 0.0
         
         # RSI取得
-        rsi_val = get_rsi(ticker)
+        try:
+            rsi_val = get_rsi(ticker)
+        except Exception as e:
+            print(f"Failed to get RSI for {ticker}: {e}")
+            rsi_val = 50.0
         
         # 壁への距離取得 (中期の壁を基準にする)
         wall_name, wall_dist = get_wall_info(current_price, vp_mid)
