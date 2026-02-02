@@ -76,26 +76,37 @@ def get_margin_balance(ticker):
         return {"buy": "-", "sell": "-", "ratio": "-", "date": ""}
 
 def get_current_price(ticker):
-    """yfinanceから最新の価格を取得 (1分足を使用してリアルタイム性を確保)"""
-    ticker = normalize_ticker(ticker)
+    """Yahoo Finance JPから最新の価格を取得 (yfinanceの数分〜15分の遅延を回避)"""
+    code = str(ticker).replace(".T", "").strip()
+    url = f"https://finance.yahoo.co.jp/quote/{code}"
     try:
-        # 1分足で最新のデータを取得
+        headers = {"User-Agent": "Mozilla/5.0"}
+        r = requests.get(url, headers=headers, timeout=5)
+        soup = BeautifulSoup(r.content, "html.parser")
+        
+        # 1. <span>タグのクラス名から取得 (頻繁に変わる可能性があるが、現在の主要なパターン)
+        # _3rXWJKZF は現在の現在値クラス
+        price_tag = soup.find("span", class_="_3rXWJKZF")
+        if not price_tag:
+            # 2. セレクタで試行
+            price_tag = soup.select_one('span[class*="_3rXWJKZF"]')
+        
+        if price_tag:
+            price_text = price_tag.get_text().replace(",", "")
+            return float(price_text)
+            
+        # 3. yfinanceでフォールバック
+        print(f"Scraping failed for {ticker}, falling back to yfinance...")
         df = yf.download(ticker, period="1d", interval="1m", progress=False, threads=False)
         if df.empty:
-            # 1分足が取れない場合（早朝など）は日足でフォールバック
             df = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False)
         
-        if df.empty:
-            return None
-        
-        if isinstance(df.columns, pd.MultiIndex):
-            df.columns = df.columns.get_level_values(0)
-        
-        # 最終行の終値を取得
-        valid_closes = df["Close"].dropna()
-        if valid_closes.empty:
-            return None
-        return float(valid_closes.iloc[-1])
+        if not df.empty:
+            if isinstance(df.columns, pd.MultiIndex):
+                df.columns = df.columns.get_level_values(0)
+            return float(df["Close"].dropna().iloc[-1])
+            
+        return None
         
     except Exception as e:
         print(f"Price Error {ticker}: {e}")
