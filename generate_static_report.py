@@ -392,7 +392,7 @@ def main():
         
         <!-- ヒートマップセクション -->
         <div id="heatmap-container" style="margin-bottom:24px;">
-            <h3 style="margin-top:0; color:#333;">🌡️ 13銘柄ヒートマップ (勢い)</h3>
+            <h3 style="margin-top:0; color:#333;">🌡️ {len(TARGET_TICKERS)}銘柄ヒートマップ (勢い)</h3>
             <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:8px;">
                 <!-- ヒートマップタイルがここに挿入される -->
             </div>
