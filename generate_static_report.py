@@ -98,6 +98,35 @@ def get_current_price(ticker):
         print(f"Price Error {ticker}: {e}")
         return None
 
+def get_japanese_name(ticker):
+    """Yahoo!ファイナンスJPから日本語の銘柄名を取得"""
+    url = f"https://finance.yahoo.co.jp/quote/{ticker}"
+    try:
+        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
+        soup = BeautifulSoup(r.content, "html.parser")
+        
+        # タイトルから銘柄名を抽出 (例: "キオクシアホールディングス(株)【285A】")
+        title = soup.find("title")
+        if title:
+            title_text = title.get_text(strip=True)
+            # 【】より前の部分を取得
+            if "【" in title_text:
+                name_part = title_text.split("【")[0].strip()
+                # (株)などを削除
+                name_part = name_part.replace("(株)", "").replace("（株）", "")
+                name_part = name_part.replace("株式会社", "").strip()
+                return name_part
+        
+        # フォールバック: h1タグから取得
+        h1 = soup.find("h1")
+        if h1:
+            return h1.get_text(strip=True)
+        
+        return None
+    except Exception as e:
+        print(f"Japanese name error {ticker}: {e}")
+        return None
+
 def get_heat_score(ticker):
     """出来高の急増度（ヒートスコア）を算出"""
     ticker = normalize_ticker(ticker)
