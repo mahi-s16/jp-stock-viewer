@@ -76,18 +76,22 @@ def get_margin_balance(ticker):
         return {"buy": "-", "sell": "-", "ratio": "-", "date": ""}
 
 def get_current_price(ticker):
-    """yfinanceから最新の日足終値を取得"""
+    """yfinanceから最新の価格を取得 (1分足を使用してリアルタイム性を確保)"""
     ticker = normalize_ticker(ticker)
     try:
-        # 確実に終値を取るため、期間を少し長めに取る
-        df = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False)
+        # 1分足で最新のデータを取得
+        df = yf.download(ticker, period="1d", interval="1m", progress=False, threads=False)
+        if df.empty:
+            # 1分足が取れない場合（早朝など）は日足でフォールバック
+            df = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False)
+        
         if df.empty:
             return None
         
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
         
-        # 欠損値を除去して最新の終値を取得
+        # 最終行の終値を取得
         valid_closes = df["Close"].dropna()
         if valid_closes.empty:
             return None
