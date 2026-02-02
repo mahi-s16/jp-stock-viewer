@@ -13,8 +13,19 @@ from datetime import datetime, timedelta, timezone
 TARGET_TICKERS = [
     "285A.T", "9348.T", "7011.T", "8306.T", "6501.T", 
     "6701.T", "8593.T", "1969.T", "2749.T", "186A.T", 
-    "4259.T", "3778.T", "5572.T"
+    "3778.T", "5572.T", "8035.T", "6857.T",
+    "6146.T", "6920.T", "9101.T", "9104.T", "9432.T",
+    "9984.T", "7203.T", "8058.T"
 ]
+
+def normalize_ticker(code):
+    """ティッカーを.T形式に統一"""
+    code = str(code).strip()
+    if not code: return ""
+    if code.endswith(".T"): return code
+    if re.match(r'^\d{4}[A-Z]?$', code): # 285A or 7203
+        return f"{code}.T"
+    return code
 
 # ===============================
 # ロジック
@@ -67,87 +78,55 @@ def get_margin_balance(ticker):
 
 def get_current_price(ticker):
     """yfinanceから最新の日足終値を取得"""
+    ticker = normalize_ticker(ticker)
     try:
-        # 直近2日間の日足データを取得（確実に終値を取るため）
-        df = yf.download(ticker, period="2d", interval="1d", progress=False, threads=False)
+        # 確実に終値を取るため、期間を少し長めに取る
+        df = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False)
         if df.empty:
             return None
         
-        # マルチインデックスの場合、1階層目を取得
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
         
-        # 最新の終値を返す
-        close_price = df["Close"].iloc[-1]
-        return float(close_price)
+        # 欠損値を除去して最新の終値を取得
+        valid_closes = df["Close"].dropna()
+        if valid_closes.empty:
+            return None
+        return float(valid_closes.iloc[-1])
         
     except Exception as e:
         print(f"Price Error {ticker}: {e}")
         return None
 
-def get_japanese_name(ticker):
-    """Yahoo!ファイナンスJPから日本語の銘柄名を取得"""
-    url = f"https://finance.yahoo.co.jp/quote/{ticker}"
-    try:
-        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=5)
-        soup = BeautifulSoup(r.content, "html.parser")
-        
-        # タイトルから銘柄名を抽出 (例: "キオクシアホールディングス(株)【285A】")
-        title = soup.find("title")
-        if title:
-            title_text = title.get_text(strip=True)
-            # 【】より前の部分を取得
-            if "【" in title_text:
-                name_part = title_text.split("【")[0].strip()
-                # (株)などを削除
-                name_part = name_part.replace("(株)", "").replace("（株）", "")
-                name_part = name_part.replace("株式会社", "").strip()
-                return name_part
-        
-        # フォールバック: h1タグから取得
-        h1 = soup.find("h1")
-        if h1:
-            return h1.get_text(strip=True)
-        
-        return None
-    except Exception as e:
-        print(f"Japanese name error {ticker}: {e}")
-        return None
-
 def get_heat_score(ticker):
     """出来高の急増度（ヒートスコア）を算出"""
+    ticker = normalize_ticker(ticker)
     try:
-        # 直近5日間の5分足データを取得
-        df = yf.download(ticker, period="5d", interval="5m", progress=False, threads=False)
-        if df.empty or len(df) < 20:
-            return 0.0, 0.0
+        # 5分足(5d分)と日足(5d分)をまとめて取得を検討したいが、インターバルが違うので個別
+        df_5m = yf.download(ticker, period="5d", interval="5m", progress=False, threads=False)
+        if df_5m.empty or len(df_5m) < 5:
+            return 0.0, 0.0, 0.0
             
-        if isinstance(df.columns, pd.MultiIndex):
-            df.columns = df.columns.get_level_values(0)
+        if isinstance(df_5m.columns, pd.MultiIndex):
+            df_5m.columns = df_5m.columns.get_level_values(0)
             
-        # 平均出来高（ベースライン）を算出
-        avg_vol = df["Volume"].mean()
-        
-        # 直近の出来高（最新の5分足1本分）
-        current_vol = df["Volume"].iloc[-1]
-        
-        # スコア計算
+        avg_vol = df_5m["Volume"].mean()
+        current_vol = df_5m["Volume"].iloc[-1]
         score = current_vol / avg_vol if avg_vol > 0 else 0
         
-        # 前日比（%）を算出
-        # yf.download(period="2d", interval="1d") を使って前日終値を取得
-        df_daily = yf.download(ticker, period="3d", interval="1d", progress=False, threads=False)
+        # 前日比計算用
+        df_1d = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False)
         change_pct = 0.0
-        if not df_daily.empty and len(df_daily) >= 2:
-            if isinstance(df_daily.columns, pd.MultiIndex):
-                df_daily.columns = df_daily.columns.get_level_values(0)
+        if not df_1d.empty and len(df_1d) >= 2:
+            if isinstance(df_1d.columns, pd.MultiIndex):
+                df_1d.columns = df_1d.columns.get_level_values(0)
             
-            # 最新の終値と、その1日前の終値
-            current_close = df_daily["Close"].iloc[-1]
-            prev_close = df_daily["Close"].iloc[-2]
-            
-            if prev_close > 0:
-                change_pct = ((current_close - prev_close) / prev_close) * 100
+            closes = df_1d["Close"].dropna()
+            if len(closes) >= 2:
+                current_close = closes.iloc[-1]
+                prev_close = closes.iloc[-2]
+                if prev_close > 0:
+                    change_pct = ((current_close - prev_close) / prev_close) * 100
             
         return round(score, 2), current_vol, round(change_pct, 2)
         
