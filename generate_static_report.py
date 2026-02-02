@@ -84,12 +84,11 @@ def get_current_price(ticker):
         r = requests.get(url, headers=headers, timeout=5)
         soup = BeautifulSoup(r.content, "html.parser")
         
-        # 1. <span>タグのクラス名から取得 (頻繁に変わる可能性があるが、現在の主要なパターン)
-        # _3rXWJKZF は現在の現在値クラス
-        price_tag = soup.find("span", class_="_3rXWJKZF")
+        # 1. <span>タグのクラス名から取得 (PriceBoard__price__ シリーズが現在の標準)
+        price_tag = soup.select_one('span[class*="PriceBoard__price__"]')
         if not price_tag:
-            # 2. セレクタで試行
-            price_tag = soup.select_one('span[class*="_3rXWJKZF"]')
+            # 2. 強力なフォールバック (StyledNumber__value__ や _3rXWJKZF)
+            price_tag = soup.select_one('span[class*="StyledNumber__value__"], span[class*="_3rXWJKZF"]')
         
         if price_tag:
             price_text = price_tag.get_text().replace(",", "")
