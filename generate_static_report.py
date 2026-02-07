@@ -417,10 +417,16 @@ def process_ticker(code):
         </div>
         """)
         
-        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist, change_pct
+        # 信用倍率の数値化
+        try:
+            margin_ratio = float(margin['ratio'].replace(",", "")) if margin['ratio'] != "-" else 999.0
+        except:
+            margin_ratio = 999.0
+
+        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist, change_pct, margin_ratio
         
     except Exception as e:
-        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0, 0
+        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0, 0, 999.0
 
 # ===============================
 # メイン処理
@@ -477,7 +483,27 @@ def main():
                     <!-- JSまたはPythonで挿入 -->
                 </tbody>
             </table>
-            <p style="font-size:12px; color:#666; margin-top:10px;">※勢いスコア：直近5分間の出来高が、過去5日間の5分足平均出来高の何倍かを示した数値です。</p>
+        </div>
+        <p style="font-size:12px; color:#666; margin-top:10px;">※勢いスコア：直近5分間の出来高が、過去5日間の5分足平均出来高の何倍かを示した数値です。</p>
+        </div>
+
+        <!-- 信用倍率ランキングセクション -->
+        <div id="margin-ranking" style="background:#fff; border:2px solid #2196F3; border-radius:8px; padding:16px; margin-bottom:24px;">
+            <h3 style="margin-top:0; color:#2196F3;">💎 信用倍率ランキング (低い順)</h3>
+            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+                <thead style="background:#e3f2fd;">
+                    <tr>
+                        <th style="padding:8px; border-bottom:2px solid #2196F3;">順位</th>
+                        <th style="padding:8px; border-bottom:2px solid #2196F3;">銘柄</th>
+                        <th style="padding:8px; border-bottom:2px solid #2196F3;">倍率</th>
+                        <th style="padding:8px; border-bottom:2px solid #2196F3;">現在値</th>
+                    </tr>
+                </thead>
+                <tbody id="margin-ranking-body">
+                    <!-- 信用ランキング挿入 -->
+                </tbody>
+            </table>
+            <p style="font-size:12px; color:#666; margin-top:10px;">※信用倍率が低いほど、将来の売り圧力が少なく需給が良いとされます。</p>
         </div>
 
         <div class="nav">
@@ -489,7 +515,7 @@ def main():
     ticker_results = []
     for code in TARGET_TICKERS:
         print(f"Processing {code}...")
-        html, score, name, price, rsi, wall_name, wall_dist, change_pct = process_ticker(code)
+        html, score, name, price, rsi, wall_name, wall_dist, change_pct, margin_ratio = process_ticker(code)
         ticker_results.append({
             "code": code,
             "html": html,
@@ -499,7 +525,8 @@ def main():
             "rsi": rsi,
             "wall_name": wall_name,
             "wall_dist": wall_dist,
-            "change_pct": change_pct
+            "change_pct": change_pct,
+            "margin_ratio": margin_ratio
         })
     
     # スコアでソート
@@ -537,6 +564,39 @@ def main():
         """)
     
     full_html = full_html.replace('<!-- JSまたはPythonで挿入 -->', "".join(ranking_rows))
+
+    # 信用倍率でソート (低い順、999は除外または末尾へ)
+    margin_ranking = sorted(ticker_results, key=lambda x: x["margin_ratio"])
+    
+    margin_ranking_rows = []
+    for i, res in enumerate(margin_ranking[:10]):
+        if res["margin_ratio"] == 999.0:
+            ratio_display = "-"
+            ratio_style = "color:#ccc;"
+        else:
+            ratio_display = f"{res['margin_ratio']:,}倍"
+            ratio_style = "font-weight:bold; color:#1565c0;" if res["margin_ratio"] < 1.0 else ""
+        
+        # 前日比の色付け
+        change_color = "#d32f2f" if res["change_pct"] > 0 else ("#388e3c" if res["change_pct"] < 0 else "#666")
+        change_sign = "+" if res["change_pct"] > 0 else ""
+        
+        margin_ranking_rows.append(f"""
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">{i+1}</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;">
+                <a href="#{res['code']}" style="font-weight:bold; text-decoration:none; color:#1565c0;">{res['code']}</a><br>
+                <span style="font-size:0.8em; color:#666;">{res['name']}</span>
+            </td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; {ratio_style}">{ratio_display}</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
+                <span style="font-weight:bold;">{int(res['price']):,}円</span><br>
+                <span style="font-size:0.85em; color:{change_color};">{change_sign}{res['change_pct']}%</span>
+            </td>
+        </tr>
+        """)
+    
+    full_html = full_html.replace('<!-- 信用ランキング挿入 -->', "".join(margin_ranking_rows))
 
     # ヒートマップタイルの生成
     heatmap_tiles = []
