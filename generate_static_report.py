@@ -11,10 +11,10 @@ from datetime import datetime, timedelta, timezone
 # 設定: 監視銘柄リスト
 # ===============================
 TARGET_TICKERS = [
-    "285A.T", "9348.T", "7011.T", "8306.T", "6501.T", 
-    "8593.T", "1969.T", "186A.T", "3778.T", "6269.T", 
-    "5574.T", "5595.T", "7013.T", "8088.T", "1605.T", 
-    "5586.T", "3687.T"
+    "285A.T", "9348.T", "6501.T", "6701.T", "8593.T", 
+    "1969.T", "186A.T", "3778.T", "5572.T", "1605.T", 
+    "7013.T", "6857.T", "6269.T", "5595.T", "5574.T", 
+    "8088.T"
 ]
 
 def normalize_ticker(code):
@@ -437,7 +437,7 @@ def main():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>需給レポート一覧</title>
+        <title>株需給レポート</title>
         <style>
             body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; padding: 10px; max-width: 900px; margin: 0 auto; background-color: #fcfcfc; }}
             h1 {{ text-align: center; color: #333; }}
@@ -450,7 +450,7 @@ def main():
         </style>
     </head>
     <body>
-        <h1>📊 株需給レポート一括確認</h1>
+        <h1>📊 株需給レポート</h1>
         <p style="text-align:center; color:#666; font-size:12px;">更新: {now_str}</p>
         
         <!-- ヒートマップセクション -->

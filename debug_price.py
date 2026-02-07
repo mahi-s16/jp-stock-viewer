@@ -51,7 +51,7 @@ def get_scraped_price(ticker):
         return price_element.get_text()
     return "Not found"
 
-tickers = ["8306.T", "9348.T", "285A.T"]
+tickers = ["285A.T", "9348.T", "6501.T"]
 for t in tickers:
     yf_p, yf_t = get_yfinance_price(t)
     sc_p = get_scraped_price(t)
