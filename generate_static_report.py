@@ -477,6 +477,7 @@ def main():
                     <!-- JSまたはPythonで挿入 -->
                 </tbody>
             </table>
+            <p style="font-size:12px; color:#666; margin-top:10px;">※勢いスコア：直近5分間の出来高が、過去5日間の5分足平均出来高の何倍かを示した数値です。</p>
         </div>
 
         <div class="nav">

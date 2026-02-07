@@ -20,6 +20,11 @@
     - [stock_sector_mapping.json](file:///Users/mahi/.gemini/antigravity/scratch/tdnet_summary/stock_chart/scripts/stock_sector_mapping.json)
     - `3687.json` (DELETE)
 
+### 4. GitHub へのデプロイ
+- すべての修正内容を GitHub の `main` ブランチにプッシュしました。
+- GitHub Actions により、以下のURLで最新のレポートが自動公開されます。
+- [公開サイトURL](https://mahi-s16.github.io/jp-stock-viewer/)
+
 ## 検証結果
 
 - `generate_static_report.py` を再実行し、生成された `index.html` において以下を確認済みです。

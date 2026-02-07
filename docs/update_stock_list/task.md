@@ -6,4 +6,5 @@
     - `scripts/generate_missing_stocks.py`
     - `scripts/stock_sector_mapping.json`
 - [x] 各プロジェクトのレポート再生成と動作確認
+- [x] GitHub (mainブランチ) へのプッシュによるデプロイ
 - [x] 最終的な修正内容のドキュメント化
