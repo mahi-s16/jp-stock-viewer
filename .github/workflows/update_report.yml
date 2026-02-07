@@ -2,9 +2,9 @@ name: Auto Update Stock Report
 
 on:
   schedule:
-    # 日本時間 9:00 - 15:30 の間、15分ごとに実行
-    - cron: '*/15 0-5 * * 1-5' # 9:00 - 14:45 JST
-    - cron: '0,15,30 6 * * 1-5' # 15:00, 15:15, 15:30 JST
+    # 日本時間 9:00 - 15:30 の間、10分ごとに実行
+    - cron: '*/10 0-5 * * 1-5' # 9:00 - 14:50 JST
+    - cron: '0,10,20,30 6 * * 1-5' # 15:00 - 15:30 JST
   workflow_dispatch: # 手動実行ボタンも有効化
   push: # コード更新時にも即実行
     branches: ["main"]
@@ -23,6 +23,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
+          cache: 'pip' # pip キャッシュを有効化
 
       - name: Install dependencies
         run: |

@@ -143,21 +143,24 @@ def get_japanese_name(ticker):
 def get_heat_score(ticker):
     """出来高の急増度（ヒートスコア）を算出"""
     ticker = normalize_ticker(ticker)
+    # 初期値
+    default_res = (1.0, 0.0, 0.0)
     try:
-        # 5分足(5d分)と日足(5d分)をまとめて取得を検討したいが、インターバルが違うので個別
-        df_5m = yf.download(ticker, period="5d", interval="5m", progress=False, threads=False)
-        if df_5m.empty or len(df_5m) < 5:
-            return 0.0, 0.0, 0.0
+        # 5分足(5d分)
+        df_5m = yf.download(ticker, period="5d", interval="5m", progress=False, threads=False, timeout=10)
+        if df_5m.empty or len(df_5m) < 2:
+            # データが少なすぎる場合は終了
+            return default_res
             
         if isinstance(df_5m.columns, pd.MultiIndex):
             df_5m.columns = df_5m.columns.get_level_values(0)
             
         avg_vol = df_5m["Volume"].mean()
-        current_vol = df_5m["Volume"].iloc[-1]
-        score = current_vol / avg_vol if avg_vol > 0 else 0
+        current_vol = float(df_5m["Volume"].iloc[-1])
+        score = float(current_vol / avg_vol) if avg_vol > 0 else 1.0
         
         # 前日比計算用
-        df_1d = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False)
+        df_1d = yf.download(ticker, period="5d", interval="1d", progress=False, threads=False, timeout=10)
         change_pct = 0.0
         if not df_1d.empty and len(df_1d) >= 2:
             if isinstance(df_1d.columns, pd.MultiIndex):
@@ -165,8 +168,8 @@ def get_heat_score(ticker):
             
             closes = df_1d["Close"].dropna()
             if len(closes) >= 2:
-                current_close = closes.iloc[-1]
-                prev_close = closes.iloc[-2]
+                current_close = float(closes.iloc[-1])
+                prev_close = float(closes.iloc[-2])
                 if prev_close > 0:
                     change_pct = ((current_close - prev_close) / prev_close) * 100
             
@@ -174,7 +177,7 @@ def get_heat_score(ticker):
         
     except Exception as e:
         print(f"Heat score error {ticker}: {e}")
-        return 0.0, 0.0, 0.0
+        return default_res
 
 def get_heat_color(score):
     """スコアに応じたヒートマップの色を返す"""
@@ -194,7 +197,7 @@ def get_rsi(ticker, period="14d"):
     """RSI(14)を算出"""
     try:
         # 過去1ヶ月分程度の日足データを取得
-        df = yf.download(ticker, period="1mo", interval="1d", progress=False, threads=False)
+        df = yf.download(ticker, period="1mo", interval="1d", progress=False, threads=False, timeout=10)
         if df.empty or len(df) < 15:
             return 50.0 # デフォルト
             
@@ -205,9 +208,13 @@ def get_rsi(ticker, period="14d"):
         gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
         loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
         
-        rs = gain / loss
+        div = loss.iloc[-1]
+        if pd.isna(div) or div == 0:
+            return 50.0
+            
+        rs = gain.iloc[-1] / div
         rsi = 100 - (100 / (1 + rs))
-        return round(rsi.iloc[-1], 1)
+        return round(float(rsi), 1)
     except Exception as e:
         print(f"RSI error {ticker}: {e}")
         return 50.0
@@ -246,16 +253,21 @@ def calc_profile(ticker, mode="short"):
     period = "5d" if mode == "short" else "1mo"
     interval = "1m" if mode == "short" else "1d"
     try:
-        df = yf.download(ticker, period=period, interval=interval, progress=False, threads=False)
-        if df.empty: return []
+        df = yf.download(ticker, period=period, interval=interval, progress=False, threads=False, timeout=10)
+        if df.empty: return [], 0
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
         
-        price = df["Close"]
-        volume = df["Volume"]
-        current = price.iloc[-1]
+        price = df["Close"].dropna()
+        volume = df["Volume"].loc[price.index]
+        if price.empty: return [], 0
         
-        bins = np.linspace(price.min(), price.max(), 31) # 30区間
+        current = float(price.iloc[-1])
+        
+        p_min, p_max = price.min(), price.max()
+        if p_min == p_max: return [], current
+        
+        bins = np.linspace(p_min, p_max, 31) # 30区間
         indices = np.digitize(price, bins) - 1
         
         profile = {}
@@ -266,7 +278,8 @@ def calc_profile(ticker, mode="short"):
                 
         sorted_profile = sorted(profile.items(), key=lambda x: x[0], reverse=True)
         return sorted_profile, current
-    except:
+    except Exception as e:
+        print(f"Profile Error {ticker}: {e}")
         return [], 0
 
 def generate_table_html(profile, current_price, title):
