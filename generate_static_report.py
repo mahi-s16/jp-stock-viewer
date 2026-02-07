@@ -1,3 +1,4 @@
+import json
 import re
 import requests
 import argparse
@@ -423,10 +424,26 @@ def process_ticker(code):
         except:
             margin_ratio = 999.0
 
-        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist, change_pct, margin_ratio
+        # JSON用のデータ構造
+        raw_data = {
+            "code": code,
+            "name": name,
+            "price": current_price,
+            "change_pct": change_pct,
+            "heat_score": heat_score,
+            "wall_name": wall_name,
+            "wall_dist": wall_dist,
+            "rsi": rsi_val,
+            "margin_buy": margin['buy'],
+            "margin_sell": margin['sell'],
+            "margin_ratio": margin['ratio'],
+            "margin_date": margin['date']
+        }
+
+        return "".join(html_parts), heat_score, name, current_price, rsi_val, wall_name, wall_dist, change_pct, margin_ratio, raw_data
         
     except Exception as e:
-        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0, 0, 999.0
+        return f'<div style="color:red">Error processing {code}: {e}</div>', 0, code, 0, 50, "Error", 0, 0, 999.0, {}
 
 # ===============================
 # メイン処理
@@ -458,6 +475,13 @@ def main():
     <body>
         <h1>📊 株需給レポート</h1>
         <p style="text-align:center; color:#666; font-size:12px;">更新: {now_str}</p>
+        
+        <div style="text-align:center; margin-bottom: 20px;">
+            <button onclick="downloadFullCSV()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                全銘柄データをCSV保存
+            </button>
+        </div>
         
         <!-- ヒートマップセクション -->
         <div id="heatmap-container" style="margin-bottom:24px;">
@@ -513,9 +537,10 @@ def main():
     
     # 各銘柄の処理
     ticker_results = []
+    full_raw_data = []
     for code in TARGET_TICKERS:
         print(f"Processing {code}...")
-        html, score, name, price, rsi, wall_name, wall_dist, change_pct, margin_ratio = process_ticker(code)
+        html, score, name, price, rsi, wall_name, wall_dist, change_pct, margin_ratio, raw_data = process_ticker(code)
         ticker_results.append({
             "code": code,
             "html": html,
@@ -528,6 +553,8 @@ def main():
             "change_pct": change_pct,
             "margin_ratio": margin_ratio
         })
+        if raw_data:
+            full_raw_data.append(raw_data)
     
     # スコアでソート
     ranking = sorted(ticker_results, key=lambda x: x["score"], reverse=True)
@@ -632,8 +659,54 @@ def main():
         full_html += res["html"]
         full_html += '</div>'
         
-    # フッター
-    full_html += """
+    # JSONデータの埋め込みとJavaScriptの追加
+    full_html += f"""
+    <script id="full-data-json" type="application/json">
+        {json.dumps(full_raw_data, ensure_ascii=False)}
+    </script>
+    <script>
+    function downloadFullCSV() {{
+        const jsonData = JSON.parse(document.getElementById('full-data-json').textContent);
+        const headers = ["取得日時", "コード", "銘柄名", "現在値", "前日比(%)", "勢い(倍)", "壁", "壁距離(%)", "RSI", "信用買残", "信用売残", "信用倍率", "信用残更新日"];
+        
+        const csvRows = [];
+        csvRows.push(headers.join(','));
+        
+        const timestamp = "{now_str}";
+        
+        jsonData.forEach(item => {{
+            const row = [
+                timestamp,
+                item.code,
+                `"${{item.name.replace(/"/g, '""')}}"`,
+                item.price,
+                item.change_pct,
+                item.heat_score,
+                item.wall_name,
+                item.wall_dist,
+                item.rsi,
+                `"${{item.margin_buy.replace(/"/g, '""')}}"`,
+                `"${{item.margin_sell.replace(/"/g, '""')}}"`,
+                item.margin_ratio,
+                item.margin_date
+            ];
+            csvRows.push(row.join(','));
+        }});
+        
+        const csvContent = "\\ufeff" + csvRows.join('\\n');
+        const blob = new Blob([csvContent], {{ type: 'text/csv;charset=utf-8;' }});
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('style', 'display:none');
+        a.setAttribute('href', url);
+        const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, '');
+        a.setAttribute('download', `stock_report_full_${{dateStr}}.csv`);
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    }}
+    </script>
     </body>
     </html>
     """

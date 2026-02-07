@@ -18,7 +18,14 @@
     </head>
     <body>
         <h1>📊 株需給レポート</h1>
-        <p style="text-align:center; color:#666; font-size:12px;">更新: 2026-02-08 01:17</p>
+        <p style="text-align:center; color:#666; font-size:12px;">更新: 2026-02-08 01:56</p>
+        
+        <div style="text-align:center; margin-bottom: 20px;">
+            <button onclick="downloadFullCSV()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                全銘柄データをCSV保存
+            </button>
+        </div>
         
         <!-- ヒートマップセクション -->
         <div id="heatmap-container" style="margin-bottom:24px;">
@@ -46,7 +53,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">9348.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">5.15</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">4.79</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 真空 <span style="font-weight:bold;">5.0</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">57.0</span></div>
                 </div>
@@ -61,7 +68,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">6501.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.73</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.54</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 真空 <span style="font-weight:bold;">5.0</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">55.9</span></div>
                 </div>
@@ -91,7 +98,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">8593.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.34</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.35</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 真空 <span style="font-weight:bold;">5.0</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">61.4</span></div>
                 </div>
@@ -181,7 +188,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">7013.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.79</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.63</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 真空 <span style="font-weight:bold;">5.0</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">66.2</span></div>
                 </div>
@@ -196,7 +203,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">6857.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">0.89</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">0.93</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 しこり <span style="font-weight:bold;">3.5</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">59.6</span></div>
                 </div>
@@ -241,7 +248,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">5574.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">0.48</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">0.45</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 しこり <span style="font-weight:bold;">3.4</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">48.7</span></div>
                 </div>
@@ -256,7 +263,7 @@
                 <div style="font-weight:bold; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:4px; margin-bottom:4px;">8088.T</div>
                 
                 <div style="display:grid; grid-template-columns: 1fr; gap:2px; font-size:11px;">
-                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.62</span>x</div>
+                    <div title="バースト・スコア">💥 <span style="font-weight:bold; font-size:14px;">1.5</span>x</div>
                     <div title="壁までの距離" style="white-space:nowrap;">🚧 真空 <span style="font-weight:bold;">5.0</span>%</div>
                     <div title="RSI(14)">📊 RSI <span style="">50.1</span></div>
                 </div>
@@ -288,7 +295,7 @@
                 <a href="#9348.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">9348.T</a> <span style="background:#ff5252; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">🔥 急騰</span><br>
                 <span style="font-size:0.8em; color:#666;">ｉｓｐａｃｅ</span>
             </td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; font-weight:bold; color:#ff5252;">5.15倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; font-weight:bold; color:#ff5252;">4.79倍</td>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
                 <span style="font-weight:bold;">645円</span><br>
                 <span style="font-size:0.85em; color:#d32f2f;">+5.39%</span>
@@ -311,32 +318,6 @@
         <tr>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">3</td>
             <td style="padding:8px; border-bottom:1px solid #eee;">
-                <a href="#7013.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">7013.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
-                <span style="font-size:0.8em; color:#666;">ＩＨＩ</span>
-            </td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.79倍</td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
-                <span style="font-weight:bold;">3,946円</span><br>
-                <span style="font-size:0.85em; color:#d32f2f;">+6.5%</span>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">4</td>
-            <td style="padding:8px; border-bottom:1px solid #eee;">
-                <a href="#6501.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">6501.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
-                <span style="font-size:0.8em; color:#666;">日立製作所</span>
-            </td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.73倍</td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
-                <span style="font-weight:bold;">5,367円</span><br>
-                <span style="font-size:0.85em; color:#d32f2f;">+3.93%</span>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">5</td>
-            <td style="padding:8px; border-bottom:1px solid #eee;">
                 <a href="#1605.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">1605.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
                 <span style="font-size:0.8em; color:#666;">ＩＮＰＥＸ</span>
             </td>
@@ -348,20 +329,20 @@
         </tr>
         
         <tr>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">6</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">4</td>
             <td style="padding:8px; border-bottom:1px solid #eee;">
-                <a href="#8088.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">8088.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
-                <span style="font-size:0.8em; color:#666;">岩谷産業</span>
+                <a href="#7013.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">7013.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
+                <span style="font-size:0.8em; color:#666;">ＩＨＩ</span>
             </td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.62倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.63倍</td>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
-                <span style="font-weight:bold;">1,945円</span><br>
-                <span style="font-size:0.85em; color:#d32f2f;">+1.49%</span>
+                <span style="font-weight:bold;">3,946円</span><br>
+                <span style="font-size:0.85em; color:#d32f2f;">+6.5%</span>
             </td>
         </tr>
         
         <tr>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">7</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">5</td>
             <td style="padding:8px; border-bottom:1px solid #eee;">
                 <a href="#186A.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">186A.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
                 <span style="font-size:0.8em; color:#666;">アストロスケールホールディングス</span>
@@ -374,12 +355,38 @@
         </tr>
         
         <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">6</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;">
+                <a href="#6501.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">6501.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
+                <span style="font-size:0.8em; color:#666;">日立製作所</span>
+            </td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.54倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
+                <span style="font-weight:bold;">5,367円</span><br>
+                <span style="font-size:0.85em; color:#d32f2f;">+3.93%</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">7</td>
+            <td style="padding:8px; border-bottom:1px solid #eee;">
+                <a href="#8088.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">8088.T</a> <span style="background:#ff9800; color:white; padding:1px 6px; border-radius:10px; font-size:0.7em; margin-left:4px; white-space:nowrap;">⚡️ 活性</span><br>
+                <span style="font-size:0.8em; color:#666;">岩谷産業</span>
+            </td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.5倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
+                <span style="font-weight:bold;">1,945円</span><br>
+                <span style="font-size:0.85em; color:#d32f2f;">+1.49%</span>
+            </td>
+        </tr>
+        
+        <tr>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">8</td>
             <td style="padding:8px; border-bottom:1px solid #eee;">
                 <a href="#8593.T" style="font-weight:bold; text-decoration:none; color:#1565c0;">8593.T</a> <br>
                 <span style="font-size:0.8em; color:#666;">三菱ＨＣキャピタル</span>
             </td>
-            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.34倍</td>
+            <td style="padding:8px; border-bottom:1px solid #eee; text-align:center; ">1.35倍</td>
             <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">
                 <span style="font-weight:bold;">1,420円</span><br>
                 <span style="font-size:0.85em; color:#d32f2f;">+1.43%</span>
@@ -820,7 +827,7 @@
                 <span style="color:#d32f2f;">買残 4,898,300</span> / 
                 <span style="color:#1976d2;">売残 2,000</span> / 
                 倍率 2,449.15倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#d32f2f;">5.15倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#d32f2f;">4.79倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1057,7 +1064,7 @@
                 <span style="color:#d32f2f;">買残 5,468,900</span> / 
                 <span style="color:#1976d2;">売残 616,200</span> / 
                 倍率 8.88倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.73倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.54倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1313,92 +1320,92 @@
             <tbody>
                 
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,349 - 5,385</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,402,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,336 - 5,372</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,830,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,313 - 5,349</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,507,200</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,300 - 5,336</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,496,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,276 - 5,312</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">671,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,047 - 5,083</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">736,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,239 - 5,275</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,532,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,974 - 5,010</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,189,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">5,203 - 5,239</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">879,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,938 - 4,974</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,875,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,983 - 5,019</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,132,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,902 - 4,938</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,493,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,946 - 4,982</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,637,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,866 - 4,902</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,241,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,910 - 4,946</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,396,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,793 - 4,829</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,806,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,873 - 4,909</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,589,800</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,800 - 4,836</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,450,600</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,763 - 4,799</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">5,347,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,757 - 4,793</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">6,162,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,726 - 4,762</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">3,577,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,721 - 4,757</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,660,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,690 - 4,726</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,278,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,685 - 4,721</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,023,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,470 - 4,506</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">4,745,200</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,468 - 4,504</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">5,197,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,433 - 4,469</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">8,714,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,431 - 4,467</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">8,644,800</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,395 - 4,431</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">5,686,500</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,359 - 4,395</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">6,946,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
@@ -1519,7 +1526,7 @@
                 <span style="color:#d32f2f;">買残 2,862,000</span> / 
                 <span style="color:#1976d2;">売残 136,200</span> / 
                 倍率 21.01倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.34倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.35倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -1538,92 +1545,92 @@
             <tbody>
                 
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,414 - 1,416</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">458,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,415 - 1,417</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">227,300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,413 - 1,415</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">438,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,411 - 1,413</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">696,200</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,409 - 1,411</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">845,800</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,406 - 1,408</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">560,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">524,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,404 - 1,406</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">278,900</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,409 - 1,411</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">753,300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,407 - 1,409</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">246,200</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,405 - 1,407</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">444,100</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,403 - 1,405</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">241,700</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,401 - 1,403</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">501,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">413,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,399 - 1,401</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">660,200</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">378,200</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,398 - 1,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">453,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,396 - 1,398</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">711,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">628,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,394 - 1,396</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">350,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">287,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,391 - 1,393</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">331,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,392 - 1,394</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">298,600</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,389 - 1,391</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">232,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,390 - 1,392</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">236,600</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,384 - 1,386</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">167,200</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,381 - 1,383</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">601,400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,379 - 1,381</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">686,000</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,376 - 1,378</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">260,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,388 - 1,390</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">90,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
@@ -1751,93 +1758,93 @@
             <tbody>
                 
         <tr style="background-color: #e3f2fd;">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,965 - 4,981</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">56,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,968 - 4,981</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">33,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"> <span style="font-weight:bold; color:#1565c0;">📍 現在値</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,949 - 4,965</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">115,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,955 - 4,968</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">94,700</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,933 - 4,949</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">126,700</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,942 - 4,955</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">73,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,916 - 4,932</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">82,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,930 - 4,943</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">109,100</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,900 - 4,916</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">57,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,917 - 4,930</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">65,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,883 - 4,899</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">31,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,904 - 4,917</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">47,400</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,891 - 4,904</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">38,500</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,865 - 4,878</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">27,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,867 - 4,883</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">35,400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,851 - 4,867</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">48,700</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,853 - 4,866</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">41,700</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,753 - 4,769</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">35,800</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,736 - 4,752</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">142,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,750 - 4,763</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">43,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,720 - 4,736</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">92,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,737 - 4,750</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">125,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,703 - 4,719</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">291,200</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,724 - 4,737</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">65,500</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,687 - 4,703</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">411,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,711 - 4,724</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">148,700</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,699 - 4,712</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">315,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,671 - 4,687</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">283,000</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,654 - 4,670</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">228,100</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">4,686 - 4,699</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">322,800</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
             </tbody>
@@ -1988,6 +1995,12 @@
             <tbody>
                 
         <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,162 - 1,168</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">347,300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,150 - 1,156</td>
             <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">498,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
@@ -2001,80 +2014,74 @@
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,133 - 1,139</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">776,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">617,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,128 - 1,134</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,263,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,570,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,122 - 1,128</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">3,002,000</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,736,900</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,116 - 1,122</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,504,200</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,685,100</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,111 - 1,117</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,507,700</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,892,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,105 - 1,111</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">3,288,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,437,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,099 - 1,105</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,703,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,361,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,094 - 1,100</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,980,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,324,700</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,088 - 1,094</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,557,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">783,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,082 - 1,088</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,990,300</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">661,900</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,077 - 1,083</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">659,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">423,000</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
             <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,071 - 1,077</td>
             <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,284,200</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,065 - 1,071</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,047,900</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
             </tbody>
@@ -2438,93 +2445,93 @@
             <tbody>
                 
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,215 - 2,221</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,216 - 2,221</td>
             <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,209 - 2,215</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,211 - 2,216</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,196 - 2,202</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,205 - 2,210</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,195 - 2,200</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,100</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,179 - 2,184</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,174 - 2,179</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">800</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,164 - 2,169</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,158 - 2,163</td>
             <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">600</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,190 - 2,196</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,153 - 2,158</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,148 - 2,153</td>
             <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,183 - 2,189</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,143 - 2,148</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,137 - 2,142</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,177 - 2,183</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,171 - 2,177</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">500</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,164 - 2,170</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,158 - 2,164</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">600</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,152 - 2,158</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,145 - 2,151</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,139 - 2,145</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,300</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,133 - 2,139</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,700</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,132 - 2,137</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,126 - 2,132</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">3,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,127 - 2,132</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">3,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,120 - 2,126</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">2,900</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,122 - 2,127</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">400</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
             </tbody>
@@ -2675,92 +2682,92 @@
             <tbody>
                 
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,645 - 3,656</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">458,000</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,648 - 3,656</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">383,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,634 - 3,645</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">174,500</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,623 - 3,634</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">493,700</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,640 - 3,648</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">164,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,611 - 3,622</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">830,200</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,623 - 3,631</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">515,100</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,600 - 3,611</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">964,000</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,614 - 3,622</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">670,600</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,589 - 3,600</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">631,000</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,578 - 3,589</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">229,400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,567 - 3,578</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,143,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,606 - 3,614</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">801,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,555 - 3,566</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">861,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,597 - 3,605</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">397,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,544 - 3,555</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,946,200</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,533 - 3,544</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,123,200</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,522 - 3,533</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">343,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,589 - 3,597</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">502,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,511 - 3,522</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">481,500</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,499 - 3,510</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,580 - 3,588</td>
             <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">215,000</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,466 - 3,477</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">368,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,571 - 3,579</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">721,700</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,563 - 3,571</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">787,600</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,554 - 3,562</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">653,000</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,546 - 3,554</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,343,900</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,537 - 3,545</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">1,249,900</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,529 - 3,537</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">520,900</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">3,520 - 3,528</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">224,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
@@ -2875,7 +2882,7 @@
                 <span style="color:#d32f2f;">買残 10,893,000</span> / 
                 <span style="color:#1976d2;">売残 2,741,300</span> / 
                 倍率 3.97倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.79倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.63倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -3106,7 +3113,7 @@
                 <span style="color:#d32f2f;">買残 4,032,300</span> / 
                 <span style="color:#1976d2;">売残 2,418,500</span> / 
                 倍率 1.67倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.89倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.93倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -3599,92 +3606,92 @@
             <tbody>
                 
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,027 - 2,034</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">225,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,032 - 2,037</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">167,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
-        <tr style="background-color: #e3f2fd;">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,020 - 2,027</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">503,900</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span> <span style="font-weight:bold; color:#1565c0;">📍 現在値</span></td>
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,026 - 2,031</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">142,300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,013 - 2,020</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">611,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,021 - 2,026</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">394,200</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,015 - 2,020</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">448,000</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,006 - 2,013</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">486,000</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,999 - 2,006</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">544,100</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,992 - 1,999</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">361,700</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,985 - 1,992</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">427,600</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,978 - 1,985</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">622,700</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,010 - 2,015</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">461,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,971 - 1,978</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">559,000</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,964 - 1,971</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">490,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">2,004 - 2,009</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">344,700</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,957 - 1,964</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">457,400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,950 - 1,957</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">619,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,998 - 2,003</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">448,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,943 - 1,950</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">696,600</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,936 - 1,943</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">504,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,993 - 1,998</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">300,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,929 - 1,936</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">485,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,987 - 1,992</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">325,200</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,982 - 1,987</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">449,600</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,976 - 1,981</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">371,600</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,971 - 1,976</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">524,300</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,965 - 1,970</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">368,600</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,960 - 1,965</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">418,600</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,954 - 1,959</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">416,700</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
@@ -3817,7 +3824,7 @@
                 <span style="color:#d32f2f;">買残 829,100</span> / 
                 <span style="color:#1976d2;">売残 4,300</span> / 
                 倍率 192.81倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.48倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">0.45倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -4054,7 +4061,7 @@
                 <span style="color:#d32f2f;">買残 2,960,700</span> / 
                 <span style="color:#1976d2;">売残 55,500</span> / 
                 倍率 53.35倍 | 
-                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.62倍</span> (直近5分出来高/平均)
+                <strong>勢い</strong>: <span style="font-weight:bold; color:#333;">1.5倍</span> (直近5分出来高/平均)
             </div>
             
             <div style="display:flex; flex-wrap:wrap; gap:16px;">
@@ -4073,93 +4080,93 @@
             <tbody>
                 
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,939 - 1,944</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">197,400</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,941 - 1,945</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">133,000</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,934 - 1,939</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">245,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,937 - 1,941</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">255,100</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,929 - 1,934</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">78,900</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,932 - 1,936</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">82,100</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,924 - 1,929</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">85,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,928 - 1,932</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">60,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,919 - 1,924</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">379,600</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,924 - 1,928</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">148,200</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,920 - 1,924</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">307,900</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,914 - 1,919</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">435,900</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,916 - 1,920</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">373,300</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#d32f2f; font-weight:bold;">★ 巨大なしこり</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,909 - 1,914</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">101,300</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,911 - 1,915</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">121,500</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,904 - 1,909</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">67,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,907 - 1,911</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">52,400</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,899 - 1,904</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">127,500</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,903 - 1,907</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">86,800</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,894 - 1,899</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">41,800</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,899 - 1,903</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">102,900</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,895 - 1,899</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">37,400</td>
+            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
+        </tr>
+        
+        <tr style="">
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,886 - 1,890</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">29,200</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#757575;">真空地帯</span></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,878 - 1,883</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">111,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,878 - 1,882</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">107,100</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
         </tr>
         
         <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,873 - 1,878</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">68,100</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,873 - 1,877</td>
+            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">51,600</td>
             <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,868 - 1,873</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">101,100</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,858 - 1,863</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">119,400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"></td>
-        </tr>
-        
-        <tr style="">
-            <td style="padding:6px; border:1px solid #eee; text-align:center; font-size:13px;">1,853 - 1,858</td>
-            <td style="padding:6px; border:1px solid #eee; text-align:right; font-size:13px;">308,400</td>
-            <td style="padding:6px; border:1px solid #eee; font-size:12px;"><span style="color:#f57f17; font-weight:bold;">厚いゾーン</span></td>
         </tr>
         
             </tbody>
@@ -4261,6 +4268,52 @@
             </div>
         </div>
         </div>
+    <script id="full-data-json" type="application/json">
+        [{"code": "285A.T", "name": "キオクシアホールディングス", "price": 19095.0, "change_pct": -2.23, "heat_score": 0.0, "wall_name": "しこり", "wall_dist": 0.8, "rsi": 63.3, "margin_buy": "10,422,200", "margin_sell": "1,752,800", "margin_ratio": "5.95", "margin_date": "01/30"}, {"code": "9348.T", "name": "ｉｓｐａｃｅ", "price": 645.0, "change_pct": 5.39, "heat_score": 4.79, "wall_name": "真空", "wall_dist": 5.0, "rsi": 57.0, "margin_buy": "4,898,300", "margin_sell": "2,000", "margin_ratio": "2,449.15", "margin_date": "01/30"}, {"code": "6501.T", "name": "日立製作所", "price": 5367.0, "change_pct": 3.93, "heat_score": 1.54, "wall_name": "真空", "wall_dist": 5.0, "rsi": 55.9, "margin_buy": "5,468,900", "margin_sell": "616,200", "margin_ratio": "8.88", "margin_date": "01/30"}, {"code": "6701.T", "name": "ＮＥＣ", "price": 4311.0, "change_pct": -1.96, "heat_score": 1.32, "wall_name": "しこり", "wall_dist": 0.6, "rsi": 14.8, "margin_buy": "4,657,500", "margin_sell": "226,400", "margin_ratio": "20.57", "margin_date": "01/30"}, {"code": "8593.T", "name": "三菱ＨＣキャピタル", "price": 1420.0, "change_pct": 1.43, "heat_score": 1.35, "wall_name": "真空", "wall_dist": 5.0, "rsi": 61.4, "margin_buy": "2,862,000", "margin_sell": "136,200", "margin_ratio": "21.01", "margin_date": "01/30"}, {"code": "1969.T", "name": "高砂熱学工業", "price": 4969.0, "change_pct": 4.3, "heat_score": 2.2, "wall_name": "真空", "wall_dist": 5.0, "rsi": 60.1, "margin_buy": "243,300", "margin_sell": "30,800", "margin_ratio": "7.90", "margin_date": "01/30"}, {"code": "186A.T", "name": "アストロスケールホールディングス", "price": 1143.0, "change_pct": 10.01, "heat_score": 1.56, "wall_name": "真空", "wall_dist": 5.0, "rsi": 60.1, "margin_buy": "6,959,800", "margin_sell": "1,458,000", "margin_ratio": "4.77", "margin_date": "01/30"}, {"code": "3778.T", "name": "さくらインターネット", "price": 2843.0, "change_pct": 0.49, "heat_score": 1.24, "wall_name": "真空", "wall_dist": 5.0, "rsi": 52.5, "margin_buy": "2,815,900", "margin_sell": "2,136,700", "margin_ratio": "1.32", "margin_date": "01/30"}, {"code": "5572.T", "name": "Ｒｉｄｇｅ－ｉ", "price": 2095.0, "change_pct": -0.24, "heat_score": 0.87, "wall_name": "真空", "wall_dist": 2.5, "rsi": 34.6, "margin_buy": "210,400", "margin_sell": "0", "margin_ratio": "0.00", "margin_date": "01/30"}, {"code": "1605.T", "name": "ＩＮＰＥＸ", "price": 3665.0, "change_pct": 3.01, "heat_score": 1.68, "wall_name": "真空", "wall_dist": 5.0, "rsi": 81.7, "margin_buy": "2,483,400", "margin_sell": "455,100", "margin_ratio": "5.46", "margin_date": "01/30"}, {"code": "7013.T", "name": "ＩＨＩ", "price": 3946.0, "change_pct": 6.5, "heat_score": 1.63, "wall_name": "真空", "wall_dist": 5.0, "rsi": 66.2, "margin_buy": "10,893,000", "margin_sell": "2,741,300", "margin_ratio": "3.97", "margin_date": "01/30"}, {"code": "6857.T", "name": "アドバンテスト", "price": 24530.0, "change_pct": 1.15, "heat_score": 0.93, "wall_name": "しこり", "wall_dist": 3.5, "rsi": 59.6, "margin_buy": "4,032,300", "margin_sell": "2,418,500", "margin_ratio": "1.67", "margin_date": "01/30"}, {"code": "6269.T", "name": "三井海洋開発", "price": 15260.0, "change_pct": 3.04, "heat_score": 1.05, "wall_name": "真空", "wall_dist": 5.0, "rsi": 59.8, "margin_buy": "1,990,000", "margin_sell": "98,500", "margin_ratio": "20.20", "margin_date": "01/30"}, {"code": "464A.T", "name": "ＱＰＳホールディングス", "price": 2020.0, "change_pct": 2.9, "heat_score": 1.15, "wall_name": "真空", "wall_dist": 5.0, "rsi": 59.5, "margin_buy": "3,925,000", "margin_sell": "815,000", "margin_ratio": "4.82", "margin_date": "01/30"}, {"code": "5574.T", "name": "ＡＢＥＪＡ", "price": 3050.0, "change_pct": -3.17, "heat_score": 0.45, "wall_name": "しこり", "wall_dist": 3.4, "rsi": 48.7, "margin_buy": "829,100", "margin_sell": "4,300", "margin_ratio": "192.81", "margin_date": "01/30"}, {"code": "8088.T", "name": "岩谷産業", "price": 1945.0, "change_pct": 1.49, "heat_score": 1.5, "wall_name": "真空", "wall_dist": 5.0, "rsi": 50.1, "margin_buy": "2,960,700", "margin_sell": "55,500", "margin_ratio": "53.35", "margin_date": "01/30"}]
+    </script>
+    <script>
+    function downloadFullCSV() {
+        const jsonData = JSON.parse(document.getElementById('full-data-json').textContent);
+        const headers = ["取得日時", "コード", "銘柄名", "現在値", "前日比(%)", "勢い(倍)", "壁", "壁距離(%)", "RSI", "信用買残", "信用売残", "信用倍率", "信用残更新日"];
+        
+        const csvRows = [];
+        csvRows.push(headers.join(','));
+        
+        const timestamp = "2026-02-08 01:56";
+        
+        jsonData.forEach(item => {
+            const row = [
+                timestamp,
+                item.code,
+                `"${item.name.replace(/"/g, '""')}"`,
+                item.price,
+                item.change_pct,
+                item.heat_score,
+                item.wall_name,
+                item.wall_dist,
+                item.rsi,
+                `"${item.margin_buy.replace(/"/g, '""')}"`,
+                `"${item.margin_sell.replace(/"/g, '""')}"`,
+                item.margin_ratio,
+                item.margin_date
+            ];
+            csvRows.push(row.join(','));
+        });
+        
+        const csvContent = "\ufeff" + csvRows.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('style', 'display:none');
+        a.setAttribute('href', url);
+        const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, '');
+        a.setAttribute('download', `stock_report_full_${dateStr}.csv`);
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    }
+    </script>
     </body>
     </html>
     
