@@ -26,6 +26,11 @@
 
 - 信用倍率が1.0倍を下回る銘柄（需給が良い銘柄）については、倍率が青字で強調されるように設定しました。
 
+### GitHubへの反映と自動更新
+- 変更内容をGitHubリポジトリにプッシュしました。
+- これにより、GitHub Actionsによる自動レポート生成がトリガーされました。
+- **数分以内に、オンラインで公開されているレポートも自動的に更新されます。**
+
 ### プロジェクトドキュメント
 - `docs/add_margin_ratio_ranking/` フォルダに以下のドキュメントを保存しました。
     - [task.md](file:///Users/mahi/.gemini/antigravity/scratch/docs/add_margin_ratio_ranking/task.md)
