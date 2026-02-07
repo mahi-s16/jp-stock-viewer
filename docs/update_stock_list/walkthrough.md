@@ -13,7 +13,11 @@
 - アプリのタイトルおよび見出しを「株需給レポート一括確認」から「**株需給レポート**」に変更しました。
 - 対象ファイル: [generate_static_report.py](file:///Users/mahi/.gemini/antigravity/scratch/stock_app_deploy/generate_static_report.py)
 
-### 3. 他プロジェクトの残存定義の削除 (`tdnet_summary`)
+### 3. ランキングへの注記追加
+- 「資金流入スピード・ランキング」の項目に、勢いスコアの定義（直近5分間の出来高が過去5日間の平均の何倍か）を注釈として追加しました。
+- 対象ファイル: [generate_static_report.py](file:///Users/mahi/.gemini/antigravity/scratch/stock_app_deploy/generate_static_report.py)
+
+### 4. 他プロジェクトの残存定義の削除 (`tdnet_summary`)
 - `3687` が残っていた設定ファイルを修正し、データファイルを削除しました。
 - 対象ファイル:
     - [generate_missing_stocks.py](file:///Users/mahi/.gemini/antigravity/scratch/tdnet_summary/stock_chart/scripts/generate_missing_stocks.py)
