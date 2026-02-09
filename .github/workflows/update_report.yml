@@ -3,8 +3,7 @@ name: Auto Update Stock Report
 on:
   schedule:
     # 日本時間 9:00 - 18:00 の間、10分ごとに実行
-    - cron: '*/10 0-8 * * 1-5' # 9:00 - 17:50 JST
-    - cron: '0 9 * * 1-5' # 18:00 JST
+    - cron: '*/10 0-9 * * 1-5' # 9:00 - 18:50 JST
   workflow_dispatch: # 手動実行ボタンも有効化
   push: # コード更新時にも即実行
     branches: ["main"]
